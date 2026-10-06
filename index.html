@@ -1,52 +1,448 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ویرا آسانسور مازندران | مهندسی حرکت عمودی در ساری</title>
-<meta name="description" content="ویرا آسانسور مازندران - تولید، نصب، سرویس و نگهداری آسانسور مسکونی، تجاری، و باربری در ساری و مازندران">
-<link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Vazirmatn:wght@300;500;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ویرا آسانسور مازندران | مهندسی حرکت عمودی در ساری</title>
+
+    <meta
+        name="description"
+        content="ویرا آسانسور مازندران - تولید، نصب، سرویس و نگهداری آسانسور مسکونی، تجاری، و باربری در ساری و مازندران"
+    >
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Vazirmatn:wght@300;500;900&display=swap"
+        rel="stylesheet"
+    >
 </head>
+
 <body>
-<nav class="glass-nav"><div class="logo">VIRA <span>ویرا</span></div><div class="links"><a href="#hero">  خانه  </a><a href="#catalog">  محصولات  </a><a href="#services"> خدمات </a><a href="#projects"> پروژه‌ها </a><a href="#contact"> تماس </a></div></nav>
-<header id="hero"><canvas id="elevator3D"></canvas><div class="hero-content"><h1>VIRA ELEVATOR<br><span>Engineering Vertical Motion with Precision</span></h1><p>الیت‌ترین مجری آسانسور در ساری و مازندران | نصب، نگهداری، مدرنیزاسیون</p><div class="cta"><button onclick="scrollToId('booking')">رزرو بازدید هوشمند</button><button class="ghost">کاتالوگ محصولات</button></div></div></header>
-<section id="heritage" class="glass"><h2>میراث ویرا در مازندران</h2><p>از قلب ساری تا سراسر مازندران: بیش از یک دهه مهندسی دقیق، قابلیت اطمینان محلی و استاندارد جهانی EN81. تخصص ما در شرایط اقلیمی شمال ایران تضمین طول عمر سیستم شماست.</p><div class="stats"><div><b>250+</b><span>پروژه لوکس</span></div><div><b>15</b><span>سال تجربه</span></div><div><b>24/7</b><span>امداد اضطراری</span></div></div></section>
-<section id="catalog"><h2>کاتالوگ تعاملی</h2><div class="grid">
-<div class="card"><h3>Residential مسکونی</h3><p>ظرفیت 4-8 نفره، سرعت 1m/s، کابین پانورامیک</p><span>Spec: VVVF / 5.5KW</span></div>
-<div class="card gold"><h3>Commercial تجاری</h3><p>ظرفیت 13-21 نفره، سرعت 1.6-2.5m/s</p><span>Spec: High-Traffic Group Control</span></div>
-<div class="card"><h3>High-Speed</h3><p>سرعت 4-6m/s برای برج‌ها</p><span>Spec: Destination Control</span></div>
-<div class="card"><h3>Freight باربری</h3><p>تا 5000kg، کابین صنعتی</p><span>Spec: Heavy Duty</span></div>
-</div></section>
-<section id="services"><h2>Service Precision Wizard</h2>
-<div id="booking" class="wizard-shell glass">
-<div class="wizard-progress"><div id="progressBar"></div></div>
-<div class="wizard-steps-label"><span id="dot1" class="dot active">۱ خدمت</span><span id="dot2" class="dot">۲ زمان</span><span id="dot3" class="dot">۳ تایید</span></div>
-<div id="step1" class="wstep active">
-<div class="service-cards">
-<div class="s-card" onclick="selectService(this,'نصب (Installation)')"><div class="s-icon">🏗️</div><b>نصب</b><small>Installation</small></div>
-<div class="s-card" onclick="selectService(this,'سرویس ماهانه (Maintenance)')"><div class="s-icon">⚙️</div><b>سرویس ماهانه</b><small>Maintenance</small></div>
-<div class="s-card" onclick="selectService(this,'تعمیر اضطراری (Emergency)')"><div class="s-icon">🚨</div><b>اضطراری</b><small>24/7 Repair</small></div>
-<div class="s-card" onclick="selectService(this,'مدرنیزاسیون (Modernization)')"><div class="s-icon">✨</div><b>مدرنیزاسیون</b><small>Upgrade</small></div>
-</div>
-<button class="btn-gold" onclick="goStep(2)">ادامه →</button><p class="err" id="err1"></p>
-</div>
-<div id="step2" class="wstep">
-<label>تاریخ ترجیحی</label><input type="date" id="date">
-<label>ساعت ترجیحی</label><input type="time" id="time" value="10:00">
-<label>موبایل</label><input type="tel" id="phone" placeholder="0911-xxx-xxxx">
-<div class="row"><button class="btn-ghost2" onclick="goStep(1)">← بازگشت</button><button class="btn-gold" onclick="goStep(3)">تایید و ارسال →</button></div><p class="err" id="err2"></p>
-</div>
-<div id="step3" class="wstep">
-<div id="processing"><div class="gear">⚙️</div><p>در حال تایید مهندسی ... Engineering Approval</p><div class="loader"></div></div>
-<div id="success" style="display:none"><div class="check">✓</div><h3>رزرو با موفقیت ثبت شد!</h3><p id="summary"></p><button class="btn-ghost2" onclick="goStep(1)">رزرو جدید</button></div>
-</div>
-</div>
-</section>
-<section id="projects"><h2>پروژه‌های مازندران</h2><div class="masonry"><div>پروژه چالوس مارینا</div><div>هتل اسپیناس خزر</div><div>برج‌های ساری - آسمان</div><div>ویلاهای نوشهر</div></div></section>
-<section id="contact"><h2>دفتر مرکزی ساری</h2><p>ساری، بلوار پاسداران، مرکز مهندسی ویرا | 011-333xxxxx</p><iframe src="https://maps.google.com/maps?q=Sari,Iran&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border-radius:20px;border:0"></iframe><form class="glass"><input placeholder="نام"><input placeholder="ایمیل"><textarea placeholder="توضیح پروژه..."></textarea><button>ارسال Lead</button></form></section>
-<footer>© 2026 Vira Elevator Mazandaran </footer>
-<script src="script.js"></script>
+
+    <!-- ==================== Navigation ==================== -->
+
+    <nav class="glass-nav">
+
+        <div class="logo">
+            VIRA <span>ویرا</span>
+        </div>
+
+        <div class="links">
+            <a href="#hero">خانه</a>
+            <a href="#catalog">محصولات</a>
+            <a href="#services">خدمات</a>
+            <a href="#projects">پروژه‌ها</a>
+            <a href="#contact">تماس</a>
+        </div>
+
+    </nav>
+
+
+    <!-- ==================== Hero ==================== -->
+
+    <header id="hero">
+
+        <canvas id="elevator3D"></canvas>
+
+        <div class="hero-content">
+
+            <h1>
+                VIRA ELEVATOR
+                <br>
+                <span>Engineering Vertical Motion with Precision</span>
+            </h1>
+
+            <p>
+                الیت‌ترین مجری آسانسور در ساری و مازندران |
+                نصب، نگهداری، مدرنیزاسیون
+            </p>
+
+            <div class="cta">
+                <button onclick="scrollToId('booking')">
+                    رزرو بازدید هوشمند
+                </button>
+
+                <button class="ghost">
+                    کاتالوگ محصولات
+                </button>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================== Heritage ==================== -->
+
+    <section id="heritage" class="glass">
+
+        <h2>میراث ویرا در مازندران</h2>
+
+        <p>
+            از قلب ساری تا سراسر مازندران:
+            بیش از یک دهه مهندسی دقیق، قابلیت اطمینان محلی
+            و استاندارد جهانی EN81.
+            تخصص ما در شرایط اقلیمی شمال ایران تضمین طول عمر سیستم شماست.
+        </p>
+
+        <div class="stats">
+
+            <div>
+                <b>250+</b>
+                <span>پروژه لوکس</span>
+            </div>
+
+            <div>
+                <b>15</b>
+                <span>سال تجربه</span>
+            </div>
+
+            <div>
+                <b>24/7</b>
+                <span>امداد اضطراری</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== Catalog ==================== -->
+
+    <section id="catalog">
+
+        <h2>کاتالوگ تعاملی</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>Residential مسکونی</h3>
+
+                <p>
+                    ظرفیت 4-8 نفره، سرعت 1m/s،
+                    کابین پانورامیک
+                </p>
+
+                <span>Spec: VVVF / 5.5KW</span>
+            </div>
+
+
+            <div class="card gold">
+                <h3>Commercial تجاری</h3>
+
+                <p>
+                    ظرفیت 13-21 نفره،
+                    سرعت 1.6-2.5m/s
+                </p>
+
+                <span>
+                    Spec: High-Traffic Group Control
+                </span>
+            </div>
+
+
+            <div class="card">
+                <h3>High-Speed</h3>
+
+                <p>
+                    سرعت 4-6m/s برای برج‌ها
+                </p>
+
+                <span>
+                    Spec: Destination Control
+                </span>
+            </div>
+
+
+            <div class="card">
+                <h3>Freight باربری</h3>
+
+                <p>
+                    تا 5000kg، کابین صنعتی
+                </p>
+
+                <span>
+                    Spec: Heavy Duty
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== Services ==================== -->
+
+    <section id="services">
+
+        <h2>Service Precision Wizard</h2>
+
+        <div id="booking" class="wizard-shell glass">
+
+            <!-- Progress Bar -->
+            <div class="wizard-progress">
+                <div id="progressBar"></div>
+            </div>
+
+
+            <!-- Step Labels -->
+            <div class="wizard-steps-label">
+
+                <span id="dot1" class="dot active">
+                    ۱ خدمت
+                </span>
+
+                <span id="dot2" class="dot">
+                    ۲ زمان
+                </span>
+
+                <span id="dot3" class="dot">
+                    ۳ تایید
+                </span>
+
+            </div>
+
+
+            <!-- ==================== Step 1 ==================== -->
+
+            <div id="step1" class="wstep active">
+
+                <div class="service-cards">
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'نصب (Installation)')"
+                    >
+                        <div class="s-icon">🏗️</div>
+                        <b>نصب</b>
+                        <small>Installation</small>
+                    </div>
+
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'سرویس ماهانه (Maintenance)')"
+                    >
+                        <div class="s-icon">⚙️</div>
+                        <b>سرویس ماهانه</b>
+                        <small>Maintenance</small>
+                    </div>
+
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'تعمیر اضطراری (Emergency)')"
+                    >
+                        <div class="s-icon">🚨</div>
+                        <b>اضطراری</b>
+                        <small>24/7 Repair</small>
+                    </div>
+
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'مدرنیزاسیون (Modernization)')"
+                    >
+                        <div class="s-icon">✨</div>
+                        <b>مدرنیزاسیون</b>
+                        <small>Upgrade</small>
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn-gold"
+                    onclick="goStep(2)"
+                >
+                    ادامه →
+                </button>
+
+                <p class="err" id="err1"></p>
+
+            </div>
+
+
+            <!-- ==================== Step 2 ==================== -->
+
+            <div id="step2" class="wstep">
+
+                <label>تاریخ ترجیحی</label>
+                <input type="date" id="date">
+
+
+                <label>ساعت ترجیحی</label>
+                <input
+                    type="time"
+                    id="time"
+                    value="10:00"
+                >
+
+
+                <label>موبایل</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="0911-xxx-xxxx"
+                >
+
+
+                <div class="row">
+
+                    <button
+                        class="btn-ghost2"
+                        onclick="goStep(1)"
+                    >
+                        ← بازگشت
+                    </button>
+
+                    <button
+                        class="btn-gold"
+                        onclick="goStep(3)"
+                    >
+                        تایید و ارسال →
+                    </button>
+
+                </div>
+
+                <p class="err" id="err2"></p>
+
+            </div>
+
+
+            <!-- ==================== Step 3 ==================== -->
+
+            <div id="step3" class="wstep">
+
+                <!-- Processing -->
+                <div id="processing">
+
+                    <div class="gear">⚙️</div>
+
+                    <p>
+                        در حال تایید مهندسی ...
+                        Engineering Approval
+                    </p>
+
+                    <div class="loader"></div>
+
+                </div>
+
+
+                <!-- Success -->
+                <div
+                    id="success"
+                    style="display: none;"
+                >
+
+                    <div class="check">✓</div>
+
+                    <h3>
+                        رزرو با موفقیت ثبت شد!
+                    </h3>
+
+                    <p id="summary"></p>
+
+                    <button
+                        class="btn-ghost2"
+                        onclick="goStep(1)"
+                    >
+                        رزرو جدید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== Projects ==================== -->
+
+    <section id="projects">
+
+        <h2>پروژه‌های مازندران</h2>
+
+        <div class="masonry">
+
+            <div>پروژه چالوس مارینا</div>
+
+            <div>هتل اسپیناس خزر</div>
+
+            <div>برج‌های ساری - آسمان</div>
+
+            <div>ویلاهای نوشهر</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== Contact ==================== -->
+
+    <section id="contact">
+
+        <h2>دفتر مرکزی ساری</h2>
+
+        <p>
+            ساری، بلوار پاسداران،
+            مرکز مهندسی ویرا |
+            011-333xxxxx
+        </p>
+
+
+        <!-- Google Map -->
+        <iframe
+            src="https://maps.google.com/maps?q=Sari,Iran&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="300"
+            style="border-radius: 20px; border: 0;"
+        ></iframe>
+
+
+        <!-- Contact Form -->
+        <form class="glass">
+
+            <input
+                placeholder="نام"
+            >
+
+            <input
+                placeholder="ایمیل"
+            >
+
+            <textarea
+                placeholder="توضیح پروژه..."
+            ></textarea>
+
+            <button>
+                ارسال Lead
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ==================== Footer ==================== -->
+
+    <footer>
+        © 2026 Vira Elevator Mazandaran
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
 </body>
 </html>
