@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>کاتالوگ پروژه‌ها | ویرا آسانسور</title>
+
+    <style>
+        body {
+            background: #0A0E14;
+            color: #eee;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            margin: 0;
+            padding: 80px 6%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #D4AF37;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .filters button {
+            background: transparent;
+            border: 1px solid #444;
+            border-radius: 99px;
+            color: #ccc;
+            padding: 10px 22px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filters button.active,
+        .filters button:hover {
+            background: #D4AF37;
+            color: #000;
+            border-color: #D4AF37;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(260px, 1fr)
+            );
+            gap: 18px;
+        }
+
+        .card {
+            background: #151B28;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            opacity: 1;
+            transition: 0.4s;
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #D4AF37;
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card .info {
+            padding: 16px;
+        }
+
+        .card small {
+            color: #D4AF37;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>کاتالوگ پروژه‌های ویرا</h1>
+
+    <div class="filters" id="filters">
+        <button data-f="all" class="active">همه</button>
+        <button data-f="residential">مسکونی</button>
+        <button data-f="commercial">تجاری</button>
+        <button data-f="highspeed">سرعت بالا</button>
+        <button data-f="freight">باربری</button>
+    </div>
+
+    <div class="grid" id="grid">
+
+        <div class="card" data-cat="residential">
+            <img
+                src="images/p1.jpg"
+                loading="lazy"
+                alt="بابلسر"
+            >
+
+            <div class="info">
+                <small>Residential</small>
+                <h3>برج ساحلی بابلسر</h3>
+                <p>8 توقف VVVF پانورامیک</p>
+            </div>
+        </div>
+
+        <div class="card" data-cat="commercial">
+            <img
+                src="images/p2.jpg"
+                loading="lazy"
+                alt="اسپیناس"
+            >
+
+            <div class="info">
+                <small>Commercial</small>
+                <h3>هتل اسپیناس خزر</h3>
+                <p>Group-control 1600kg</p>
+            </div>
+        </div>
+
+        <div class="card" data-cat="highspeed">
+            <img
+                src="images/p3.jpg"
+                loading="lazy"
+                alt="آسمان"
+            >
+
+            <div class="info">
+                <small>High-Speed</small>
+                <h3>برج آسمان ساری</h3>
+                <p>4.0 m/s destination</p>
+            </div>
+        </div>
+
+        <div class="card" data-cat="freight">
+            <img
+                src="images/p4.jpg"
+                loading="lazy"
+                alt="نکا"
+            >
+
+            <div class="info">
+                <small>Freight</small>
+                <h3>سوله نکا</h3>
+                <p>5000kg heavy-duty</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document
+            .getElementById('filters')
+            .addEventListener('click', function (e) {
+
+                if (e.target.tagName !== 'BUTTON') {
+                    return;
+                }
+
+                document
+                    .querySelectorAll('#filters button')
+                    .forEach(function (button) {
+                        button.classList.remove('active');
+                    });
+
+                e.target.classList.add('active');
+
+                var filter = e.target.getAttribute('data-f');
+
+                document
+                    .querySelectorAll('#grid .card')
+                    .forEach(function (card) {
+
+                        var show =
+                            filter === 'all' ||
+                            card.getAttribute('data-cat') === filter;
+
+                        card.style.transition = 'opacity 0.35s';
+                        card.style.opacity = '0';
+
+                        setTimeout(function () {
+                            card.classList.toggle('hidden', !show);
+                            card.style.opacity = '1';
+                        }, 180);
+                    });
+            });
+    </script>
+
+</body>
+
+</html>
