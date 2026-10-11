@@ -1,3 +1,14 @@
+(function(){
+    var isMobile = window.innerWidth < 768 || /Android|iPhone|iPad/i.test(navigator.userAgent);
+    window.__IS_MOBILE__ = isMobile;
+    if(isMobile){
+      var c = document.getElementById('elevator3D');
+      if(c) c.style.display = 'none';
+      var p = document.getElementById('heroPoster');
+      if(p) p.style.display = 'block';
+    }
+  })();
+
 function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 var booking={serviceType:null,preferredDate:null,preferredTime:'10:00',clientContact:''};
 function selectService(el,val){document.querySelectorAll('.s-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');booking.serviceType=val;document.getElementById('err1').innerText='';if(navigator.vibrate)navigator.vibrate(20);}
