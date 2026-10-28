@@ -544,3 +544,636 @@ h1,h2,h3,.hero-content,.glass{ font-family:'Vazirmatn',Tahoma,sans-serif; text-s
   
   
   
+
+/* ==================== Multi-page additions ==================== */
+
+/* آفست اسکرول برای نوار ناوبری ثابت (مثلاً services.html#booking) */
+html{ scroll-padding-top:90px; }
+
+/* لوگو اکنون لینک است */
+.logo{ color:#fff; text-decoration:none; }
+
+/* لینک فعال منو */
+.links a.active{ color:#D4AF37; font-weight:700; }
+
+/* فاصله محتوای صفحات داخلی از نوار ثابت */
+.page{ padding-top:90px; min-height:100vh; }
+
+@media (max-width:700px){
+  .links a{ margin:0 6px; font-size:13px; }
+  .logo{ font-size:18px; }
+}
+
+
+/* ==================== Creative Enhancements ==================== */
+
+.eyebrow {
+    color: #D4AF37;
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ==================== Hero ==================== */
+
+#hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 55%,
+            rgba(212, 175, 55, 0.16),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(30, 144, 255, 0.14),
+            transparent 40%
+        );
+}
+
+.hero-content p {
+    margin: 18px 0 6px;
+    color: #ccc;
+}
+
+/* Scroll Cue */
+
+.scroll-cue {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+
+    color: #D4AF37;
+    font-size: 28px;
+    text-decoration: none;
+
+    animation: bob 1.6s ease-in-out infinite;
+}
+
+@keyframes bob {
+    50% {
+        transform: translate(-50%, 8px);
+    }
+}
+
+/* ==================== Scroll Reveal ==================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: none;
+}
+
+/* ==================== Feature Cards ==================== */
+
+.f-icon {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.card span {
+    display: block;
+    margin-top: 14px;
+
+    color: #D4AF37;
+    font-size: 12px;
+}
+
+/* ==================== Timeline ==================== */
+
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    position: relative;
+}
+
+.t-step {
+    text-align: center;
+    padding: 24px 16px;
+}
+
+.t-num {
+    display: inline-flex;
+    width: 56px;
+    height: 56px;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-weight: 900;
+    font-size: 22px;
+    color: #000;
+
+    margin-bottom: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #D4AF37,
+        #1E90FF
+    );
+
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+}
+
+.t-step p {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+/* ==================== CTA Banner ==================== */
+
+.cta-banner {
+    text-align: center;
+
+    border-color: rgba(212, 175, 55, 0.35);
+
+    background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.12),
+        rgba(30, 144, 255, 0.08)
+    );
+}
+
+.cta-banner p {
+    color: #bbb;
+    margin-bottom: 10px;
+}
+
+.cta-banner .btn-gold.btn-link {
+    color: #000;
+    font-weight: 800;
+
+    border-radius: 12px;
+    padding: 14px 30px;
+}
+
+/* ==================== Inner Page Hero ==================== */
+
+.page-hero {
+    text-align: center;
+    padding: 50px 6% 10px;
+}
+
+.page-hero h1 {
+    font-size: 42px;
+    margin: 8px 0;
+
+    background: linear-gradient(
+        90deg,
+        #D4AF37,
+        #fff
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.page-hero p {
+    color: #aaa;
+}
+
+/* ==================== Projects ==================== */
+
+.proj-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(280px, 1fr)
+    );
+    gap: 22px;
+}
+
+.proj-card {
+    position: relative;
+
+    padding: 30px 24px;
+    min-height: 190px;
+
+    border-radius: 20px;
+    overflow: hidden;
+
+    border: 1px solid rgba(212, 175, 55, 0.2);
+
+    background: linear-gradient(
+        160deg,
+        #1a2235,
+        #0A0E14
+    );
+
+    transition:
+        transform 0.4s,
+        border-color 0.4s,
+        box-shadow 0.4s;
+}
+
+.proj-card::before {
+    content: '';
+
+    position: absolute;
+    top: -40px;
+    left: -40px;
+
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(212, 175, 55, 0.25),
+        transparent 70%
+    );
+}
+
+.proj-card:nth-child(even)::before {
+    background: radial-gradient(
+        circle,
+        rgba(30, 144, 255, 0.28),
+        transparent 70%
+    );
+}
+
+.proj-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #D4AF37;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.proj-card .tag {
+    display: inline-block;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #000;
+    background: #D4AF37;
+
+    padding: 3px 12px;
+    border-radius: 50px;
+}
+
+.proj-card h3 {
+    margin: 14px 0 6px;
+}
+
+.proj-card .meta {
+    color: #D4AF37;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.proj-card p {
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* ==================== Contact Info ==================== */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    );
+
+    gap: 16px;
+    margin: 10px 0 24px;
+}
+
+.info-card {
+    text-align: center;
+
+    padding: 22px;
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    transition: 0.3s;
+}
+
+.info-card:hover {
+    border-color: #D4AF37;
+    transform: translateY(-4px);
+}
+
+.info-card span {
+    display: block;
+
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.info-card small {
+    display: block;
+
+    color: #aaa;
+    margin-top: 4px;
+}
+
+#contact iframe {
+    margin-bottom: 10px;
+}
+
+form button {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #2a3bc0;
+    transform: translateY(-2px);
+}
+
+/* ==================== Reduced Motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .scroll-cue,
+    .gear {
+        animation: none;
+    }
+}
+
+/* =========================================================
+   Elevator Intro
+   ========================================================= */
+
+#lift-intro {
+    display: none;
+}
+
+html.intro-active {
+    overflow: hidden;
+}
+
+html.intro-active #lift-intro {
+    display: block;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    cursor: pointer;
+}
+
+/* ==================== Elevator Doors ==================== */
+
+.lift-door {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    width: 50%;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 0 2px,
+            transparent 2px 5px
+        ),
+        linear-gradient(
+            90deg,
+            #141a28,
+            #2b3550 48%,
+            #10151f
+        );
+
+    transition:
+        transform 1.9s cubic-bezier(0.77, 0, 0.18, 1);
+
+    will-change: transform;
+}
+
+.lift-door-l {
+    left: 0;
+
+    border-right:
+        2px solid rgba(212, 175, 55, 0.65);
+
+    box-shadow:
+        inset -30px 0 60px rgba(0, 0, 0, 0.55);
+}
+
+.lift-door-r {
+    right: 0;
+
+    border-left:
+        2px solid rgba(212, 175, 55, 0.65);
+
+    box-shadow:
+        inset 30px 0 60px rgba(0, 0, 0, 0.55);
+}
+
+#lift-intro.open .lift-door-l {
+    transform: translateX(-101%);
+}
+
+#lift-intro.open .lift-door-r {
+    transform: translateX(101%);
+}
+
+/* ==================== Elevator Movement ==================== */
+
+@keyframes liftHum {
+    50% {
+        transform: translateY(1.5px);
+    }
+}
+
+#lift-intro.moving .lift-door {
+    animation: liftHum 0.14s linear infinite;
+}
+
+/* ==================== Floor Display ==================== */
+
+.lift-panel {
+    position: absolute;
+
+    top: 9%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    min-width: 190px;
+
+    padding: 12px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    background: #05070a;
+
+    border:
+        1px solid rgba(212, 175, 55, 0.6);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 0 30px rgba(212, 175, 55, 0.25),
+        inset 0 0 18px rgba(212, 175, 55, 0.12);
+
+    font-family: 'Montserrat', sans-serif;
+
+    transition: opacity 0.5s;
+}
+
+.lift-floor {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 4px;
+
+    color: #D4AF37;
+
+    text-shadow:
+        0 0 16px rgba(212, 175, 55, 0.8);
+}
+
+.lift-floor.tick {
+    animation: floorTick 0.4s ease-out;
+}
+
+@keyframes floorTick {
+    from {
+        opacity: 0;
+        transform: translateY(-35%);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.lift-arrow {
+    color: #1E90FF;
+    font-size: 20px;
+
+    animation:
+        arrowPulse 0.9s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+    50% {
+        opacity: 0.25;
+        transform: translateY(-3px);
+    }
+}
+
+#lift-intro.arrived .lift-arrow {
+    visibility: hidden;
+}
+
+#lift-intro.arrived .lift-panel {
+    box-shadow:
+        0 0 60px rgba(212, 175, 55, 0.7),
+        inset 0 0 22px rgba(212, 175, 55, 0.25);
+}
+
+#lift-intro.open .lift-panel,
+#lift-intro.open .lift-skip {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==================== Skip Button ==================== */
+
+.lift-skip {
+    position: absolute;
+
+    bottom: 28px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 8px 20px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    color: #ccc;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition:
+        opacity 0.4s,
+        color 0.3s;
+}
+
+.lift-skip:hover {
+    color: #D4AF37;
+    border-color: #D4AF37;
+}
+
+/* ==================== Hero Reveal ==================== */
+
+.hero-content {
+    transition:
+        opacity 1.2s ease 0.5s,
+        transform 1.2s ease 0.5s;
+}
+
+html.intro-active:not(.intro-open) .hero-content {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+/* ==================== Elevator Intro - Reduced Motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+    #lift-intro.moving .lift-door,
+    .lift-arrow {
+        animation: none;
+    }
+}
