@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات | ویرا آسانسور مازندران</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ==================== Navigation ==================== -->
+    <nav class="glass-nav" aria-label="ناوبری اصلی">
+        <a href="index.html" class="logo">VIRA <span>ویرا</span></a>
+
+        <div class="links">
+            <a href="index.html">خانه</a>
+            <a href="catalog.html">محصولات</a>
+            <a href="services.html" class="active" aria-current="page">خدمات</a>
+            <a href="projects.html">پروژه‌ها</a>
+            <a href="contact.html">تماس</a>
+        </div>
+    </nav>
+
+    <!-- ==================== Content ==================== -->
+    <main class="page">
+<header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>رزرو خدمات</h1><p>نصب، سرویس، تعمیر اضطراری یا مدرنیزاسیون؛ در سه قدم ساده</p></header>
+<section id="services">
+
+        <h2>Service Precision Wizard</h2>
+
+        <div id="booking" class="wizard-shell glass">
+
+            <!-- Progress Bar -->
+            <div class="wizard-progress">
+                <div id="progressBar"></div>
+            </div>
+
+
+            <!-- Step Labels -->
+            <div class="wizard-steps-label">
+
+                <span id="dot1" class="dot active">
+                    ۱ خدمت
+                </span>
+
+                <span id="dot2" class="dot">
+                    ۲ زمان
+                </span>
+
+                <span id="dot3" class="dot">
+                    ۳ تایید
+                </span>
+
+            </div>
+
+
+            <!-- ==================== Step 1 ==================== -->
+
+            <div id="step1" class="wstep active">
+
+                <div class="service-cards">
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'نصب (Installation)')"
+                    >
+                        <div class="s-icon">🏗️</div>
+                        <b>نصب</b>
+                        <small>Installation</small>
+                    </div>
+
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'سرویس ماهانه (Maintenance)')"
+                    >
+                        <div class="s-icon">⚙️</div>
+                        <b>سرویس ماهانه</b>
+                        <small>Maintenance</small>
+                    </div>
+
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'تعمیر اضطراری (Emergency)')"
+                    >
+                        <div class="s-icon">🚨</div>
+                        <b>اضطراری</b>
+                        <small>24/7 Repair</small>
+                    </div>
+
+
+                    <div
+                        class="s-card"
+                        onclick="selectService(this,'مدرنیزاسیون (Modernization)')"
+                    >
+                        <div class="s-icon">✨</div>
+                        <b>مدرنیزاسیون</b>
+                        <small>Upgrade</small>
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn-gold"
+                    onclick="goStep(2)"
+                >
+                    ادامه →
+                </button>
+
+                <p class="err" id="err1"></p>
+
+            </div>
+
+
+            <!-- ==================== Step 2 ==================== -->
+
+            <div id="step2" class="wstep">
+
+                <label>تاریخ ترجیحی</label>
+                <input type="date" id="date">
+
+
+                <label>ساعت ترجیحی</label>
+                <input
+                    type="time"
+                    id="time"
+                    value="10:00"
+                >
+
+
+                <label>موبایل</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="0911-xxx-xxxx"
+                >
+
+
+                <div class="row">
+
+                    <button
+                        class="btn-ghost2"
+                        onclick="goStep(1)"
+                    >
+                        ← بازگشت
+                    </button>
+
+                    <button
+                        class="btn-gold"
+                        onclick="goStep(3)"
+                    >
+                        تایید و ارسال →
+                    </button>
+
+                </div>
+
+                <p class="err" id="err2"></p>
+
+            </div>
+
+
+            <!-- ==================== Step 3 ==================== -->
+
+            <div id="step3" class="wstep">
+
+                <!-- Processing -->
+                <div id="processing">
+
+                    <div class="gear">⚙️</div>
+
+                    <p>
+                        در حال تایید مهندسی ...
+                        Engineering Approval
+                    </p>
+
+                    <div class="loader"></div>
+
+                </div>
+
+
+                <!-- Success -->
+                <div
+                    id="success"
+                    style="display: none;"
+                >
+
+                    <div class="check">✓</div>
+
+                    <h3>
+                        رزرو با موفقیت ثبت شد!
+                    </h3>
+
+                    <p id="summary"></p>
+
+                    <button
+                        class="btn-ghost2"
+                        onclick="goStep(1)"
+                    >
+                        رزرو جدید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    </main>
+
+    <!-- ==================== Footer ==================== -->
+    <footer>
+        © 2026 Vira Elevator Mazandaran
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
