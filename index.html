@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ویرا آسانسور مازندران | مهندسی حرکت عمودی در ساری </title>
+    <title>ویرا آسانسور مازندران | مهندسی حرکت عمودی در ساری</title>
 
     <meta
         name="description"
@@ -23,26 +23,47 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Vazirmatn:wght@300;500;900&display=swap"
         rel="stylesheet"
     >
+    <!-- Intro gate: runs before first paint to avoid a flash of the site -->
+    <script>
+        // ?intro 
+        (function () {
+            var root = document.documentElement, seen = false;
+            try { seen = !!sessionStorage.getItem('viraIntro'); } catch (e) {}
+            if (/[?&]intro\b/.test(location.search)) seen = false;
+            if (seen) return;
+            root.classList.add('intro-active');
+            
+            setTimeout(function () { root.classList.remove('intro-active', 'intro-open'); }, 8000);
+        })();
+    </script>
 </head>
 
 <body>
 
+    <!-- ==================== Elevator Intro ==================== -->
+    <div id="lift-intro" role="presentation">
+        <div class="lift-door lift-door-l"></div>
+        <div class="lift-door lift-door-r"></div>
+        <div class="lift-panel" aria-live="off">
+            <span class="lift-arrow">▲</span>
+            <span id="liftFloor" class="lift-floor">G</span>
+        </div>
+        <button id="liftSkip" class="lift-skip" type="button">رد کردن ›</button>
+    </div>
+
+
     <!-- ==================== Navigation ==================== -->
 
-    <nav class="glass-nav">
-
-        <div class="logo">
-            VIRA <span>ویرا</span>
-        </div>
+    <nav class="glass-nav" aria-label="ناوبری اصلی">
+        <a href="index.html" class="logo">VIRA <span>ویرا</span></a>
 
         <div class="links">
-            <a href="#hero">خانه</a>
-            <a href="#catalog">محصولات</a>
-            <a href="#services">خدمات</a>
-            <a href="#projects">پروژه‌ها</a>
-            <a href="#contact">تماس</a>
+            <a href="index.html" class="active" aria-current="page">خانه</a>
+            <a href="catalog.html">محصولات</a>
+            <a href="services.html">خدمات</a>
+            <a href="projects.html">پروژه‌ها</a>
+            <a href="contact.html">تماس</a>
         </div>
-
     </nav>
 
 
@@ -62,10 +83,11 @@
             نصب، نگهداری، مدرنیزاسیون
           </p>
           <div class="cta">
-            <button onclick="scrollToId('booking')">رزرو بازدید هوشمند</button>
+            <button onclick="location.href='services.html#booking'">رزرو بازدید هوشمند</button>
             <a href="catalog.html" class="ghost btn-link">کاتالوگ محصولات</a>
           </div>
         </div>
+        <a class="scroll-cue" href="#heritage" aria-label="ادامه صفحه">▾</a>
       </header>
 
 
@@ -85,12 +107,12 @@
         <div class="stats">
 
             <div>
-                <b>250+</b>
+                <b data-count="250" data-suffix="+">250+</b>
                 <span>پروژه لوکس</span>
             </div>
 
             <div>
-                <b>15</b>
+                <b data-count="15">15</b>
                 <span>سال تجربه</span>
             </div>
 
@@ -104,324 +126,37 @@
     </section>
 
 
-    <!-- ==================== Catalog ==================== -->
-
-    <section id="catalog">
-
-        <h2>کاتالوگ تعاملی</h2>
-
+    <!-- ==================== Why Vira ==================== -->
+    <section id="why">
+        <h2>چرا ویرا؟</h2>
         <div class="grid">
-
-            <div class="card">
-                <h3>Residential مسکونی</h3>
-
-                <p>
-                    ظرفیت 4-8 نفره، سرعت 1m/s،
-                    کابین پانورامیک
-                </p>
-
-                <span>Spec: VVVF / 5.5KW</span>
-            </div>
-
-
-            <div class="card gold">
-                <h3>Commercial تجاری</h3>
-
-                <p>
-                    ظرفیت 13-21 نفره،
-                    سرعت 1.6-2.5m/s
-                </p>
-
-                <span>
-                    Spec: High-Traffic Group Control
-                </span>
-            </div>
-
-
-            <div class="card">
-                <h3>High-Speed</h3>
-
-                <p>
-                    سرعت 4-6m/s برای برج‌ها
-                </p>
-
-                <span>
-                    Spec: Destination Control
-                </span>
-            </div>
-
-
-            <div class="card">
-                <h3>Freight باربری</h3>
-
-                <p>
-                    تا 5000kg، کابین صنعتی
-                </p>
-
-                <span>
-                    Spec: Heavy Duty
-                </span>
-            </div>
-
+            <div class="card"><div class="f-icon">🛡️</div><h3>استاندارد EN81</h3><p>طراحی و نصب مطابق استانداردهای ایمنی بین‌المللی با بازرسی مستقل.</p></div>
+            <div class="card gold"><div class="f-icon">🌊</div><h3>مقاوم در برابر اقلیم شمال</h3><p>قطعات و پوشش‌های مقاوم در برابر رطوبت و نمک؛ مناسب سواحل خزر.</p></div>
+            <div class="card"><div class="f-icon">⚡</div><h3>درایو VVVF</h3><p>حرکت نرم، صدای کم و مصرف انرژی پایین‌تر در تمام مدل‌ها.</p></div>
+            <div class="card"><div class="f-icon">🛠️</div><h3>امداد ۲۴/۷</h3><p>تیم فنی محلی در ساری و مازندران، آماده پاسخ‌گویی در هر ساعت.</p></div>
         </div>
-
     </section>
 
-
-    <!-- ==================== Services ==================== -->
-
-    <section id="services">
-
-        <h2>Service Precision Wizard</h2>
-
-        <div id="booking" class="wizard-shell glass">
-
-            <!-- Progress Bar -->
-            <div class="wizard-progress">
-                <div id="progressBar"></div>
-            </div>
-
-
-            <!-- Step Labels -->
-            <div class="wizard-steps-label">
-
-                <span id="dot1" class="dot active">
-                    ۱ خدمت
-                </span>
-
-                <span id="dot2" class="dot">
-                    ۲ زمان
-                </span>
-
-                <span id="dot3" class="dot">
-                    ۳ تایید
-                </span>
-
-            </div>
-
-
-            <!-- ==================== Step 1 ==================== -->
-
-            <div id="step1" class="wstep active">
-
-                <div class="service-cards">
-
-                    <div
-                        class="s-card"
-                        onclick="selectService(this,'نصب (Installation)')"
-                    >
-                        <div class="s-icon">🏗️</div>
-                        <b>نصب</b>
-                        <small>Installation</small>
-                    </div>
-
-
-                    <div
-                        class="s-card"
-                        onclick="selectService(this,'سرویس ماهانه (Maintenance)')"
-                    >
-                        <div class="s-icon">⚙️</div>
-                        <b>سرویس ماهانه</b>
-                        <small>Maintenance</small>
-                    </div>
-
-
-                    <div
-                        class="s-card"
-                        onclick="selectService(this,'تعمیر اضطراری (Emergency)')"
-                    >
-                        <div class="s-icon">🚨</div>
-                        <b>اضطراری</b>
-                        <small>24/7 Repair</small>
-                    </div>
-
-
-                    <div
-                        class="s-card"
-                        onclick="selectService(this,'مدرنیزاسیون (Modernization)')"
-                    >
-                        <div class="s-icon">✨</div>
-                        <b>مدرنیزاسیون</b>
-                        <small>Upgrade</small>
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="btn-gold"
-                    onclick="goStep(2)"
-                >
-                    ادامه →
-                </button>
-
-                <p class="err" id="err1"></p>
-
-            </div>
-
-
-            <!-- ==================== Step 2 ==================== -->
-
-            <div id="step2" class="wstep">
-
-                <label>تاریخ ترجیحی</label>
-                <input type="date" id="date">
-
-
-                <label>ساعت ترجیحی</label>
-                <input
-                    type="time"
-                    id="time"
-                    value="10:00"
-                >
-
-
-                <label>موبایل</label>
-                <input
-                    type="tel"
-                    id="phone"
-                    placeholder="0911-xxx-xxxx"
-                >
-
-
-                <div class="row">
-
-                    <button
-                        class="btn-ghost2"
-                        onclick="goStep(1)"
-                    >
-                        ← بازگشت
-                    </button>
-
-                    <button
-                        class="btn-gold"
-                        onclick="goStep(3)"
-                    >
-                        تایید و ارسال →
-                    </button>
-
-                </div>
-
-                <p class="err" id="err2"></p>
-
-            </div>
-
-
-            <!-- ==================== Step 3 ==================== -->
-
-            <div id="step3" class="wstep">
-
-                <!-- Processing -->
-                <div id="processing">
-
-                    <div class="gear">⚙️</div>
-
-                    <p>
-                        در حال تایید مهندسی ...
-                        Engineering Approval
-                    </p>
-
-                    <div class="loader"></div>
-
-                </div>
-
-
-                <!-- Success -->
-                <div
-                    id="success"
-                    style="display: none;"
-                >
-
-                    <div class="check">✓</div>
-
-                    <h3>
-                        رزرو با موفقیت ثبت شد!
-                    </h3>
-
-                    <p id="summary"></p>
-
-                    <button
-                        class="btn-ghost2"
-                        onclick="goStep(1)"
-                    >
-                        رزرو جدید
-                    </button>
-
-                </div>
-
-            </div>
-
+    <!-- ==================== Process ==================== -->
+    <section id="process">
+        <h2>مسیر یک پروژه با ویرا</h2>
+        <div class="timeline">
+            <div class="t-step"><span class="t-num">۱</span><h3>بازدید و مشاوره</h3><p>بررسی چاه آسانسور و نیاز ساختمان.</p></div>
+            <div class="t-step"><span class="t-num">۲</span><h3>طراحی مهندسی</h3><p>انتخاب ظرفیت، سرعت و طراحی کابین.</p></div>
+            <div class="t-step"><span class="t-num">۳</span><h3>نصب و تست</h3><p>اجرا، تنظیم دقیق و تست ایمنی نهایی.</p></div>
+            <div class="t-step"><span class="t-num">۴</span><h3>سرویس مادام‌العمر</h3><p>نگهداری دوره‌ای و پشتیبانی همیشگی.</p></div>
         </div>
-
     </section>
 
-
-    <!-- ==================== Projects ==================== -->
-
-    <section id="projects">
-
-        <h2>پروژه‌های مازندران</h2>
-
-        <div class="masonry">
-
-            <div>پروژه چالوس مارینا</div>
-
-            <div>هتل اسپیناس خزر</div>
-
-            <div>برج‌های ساری - آسمان</div>
-
-            <div>ویلاهای نوشهر</div>
-
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-banner glass">
+        <h2>آماده‌اید ساختمانتان را بالا ببریم؟</h2>
+        <p>یک بازدید رایگان رزرو کنید؛ مهندسان ما در کوتاه‌ترین زمان با شما تماس می‌گیرند.</p>
+        <div class="cta">
+            <a href="services.html#booking" class="btn-gold btn-link">رزرو بازدید</a>
+            <a href="projects.html" class="ghost btn-link">مشاهده پروژه‌ها</a>
         </div>
-
     </section>
-
-
-    <!-- ==================== Contact ==================== -->
-
-    <section id="contact">
-
-        <h2>دفتر مرکزی ساری</h2>
-
-        <p>
-            ساری، بلوار پاسداران،
-            مرکز مهندسی ویرا |
-            011-333xxxxx
-        </p>
-
-
-        <!-- Google Map -->
-        <iframe
-            src="https://maps.google.com/maps?q=Sari,Iran&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="300"
-            style="border-radius: 20px; border: 0;"
-        ></iframe>
-
-
-        <!-- Contact Form -->
-        <form class="glass">
-
-            <input
-                placeholder="نام"
-            >
-
-            <input
-                placeholder="ایمیل"
-            >
-
-            <textarea
-                placeholder="توضیح پروژه..."
-            ></textarea>
-
-            <button>
-                ارسال Lead
-            </button>
-
-        </form>
-
-    </section>
-
 
     <!-- ==================== Footer ==================== -->
 
@@ -432,6 +167,7 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script src="intro.js"></script>
 
 </body>
 </html>
