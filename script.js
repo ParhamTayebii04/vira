@@ -1,222 +1,558 @@
-(function(){
-    var isMobile = window.innerWidth < 768 || /Android|iPhone|iPad/i.test(navigator.userAgent);
-    window.__IS_MOBILE__ = isMobile;
-    if(isMobile){
-      var c = document.getElementById('elevator3D');
-      if(c) c.style.display = 'none';
-      var p = document.getElementById('heroPoster');
-      if(p) p.style.display = 'block';
-    }
-  })();
+/* =========================================================
+   MOBILE DETECTION
+========================================================= */
+
+(function () {
+  const isMobile =
+      window.innerWidth < 768 ||
+      /Android|iPhone|iPad/i.test(navigator.userAgent);
+
+  window.__IS_MOBILE__ = isMobile;
+
+  if (isMobile) {
+      const canvas = document.getElementById("elevator3D");
+
+      if (canvas) {
+          canvas.style.display = "none";
+      }
+
+      const poster = document.getElementById("heroPoster");
+
+      if (poster) {
+          poster.style.display = "block";
+      }
+  }
+})();
+
+
+/* =========================================================
+ SMOOTH SCROLL
+========================================================= */
 
 function scrollToId(id) {
-    document
-        .getElementById(id)
-        .scrollIntoView({ behavior: 'smooth' });
+  document
+      .getElementById(id)
+      .scrollIntoView({
+          behavior: "smooth"
+      });
 }
 
-var booking = {
-    serviceType: null,
-    preferredDate: null,
-    preferredTime: '10:00',
-    clientContact: ''
+
+/* =========================================================
+ BOOKING DATA
+========================================================= */
+
+const booking = {
+  serviceType: null,
+  preferredDate: null,
+  preferredTime: "10:00",
+  clientContact: ""
 };
 
-function selectService(el, val) {
-    document
-        .querySelectorAll('.s-card')
-        .forEach(function (card) {
-            card.classList.remove('selected');
-        });
 
-    el.classList.add('selected');
+/* =========================================================
+ SELECT SERVICE
+========================================================= */
 
-    booking.serviceType = val;
+function selectService(el, value) {
+  document
+      .querySelectorAll(".s-card")
+      .forEach(card => {
+          card.classList.remove("selected");
+      });
 
-    document.getElementById('err1').innerText = '';
+  el.classList.add("selected");
 
-    if (navigator.vibrate) {
-        navigator.vibrate(20);
-    }
+  booking.serviceType = value;
+
+  document.getElementById("err1").innerText = "";
+
+  if (navigator.vibrate) {
+      navigator.vibrate(20);
+  }
 }
 
-function goStep(n) {
-    if (n === 2 && !booking.serviceType) {
-        document.getElementById('err1').innerText =
-            '⚠️ لطفا یک خدمت را انتخاب کنید';
 
-        return;
-    }
+/* =========================================================
+ BOOKING STEPS
+========================================================= */
 
-    if (n === 3) {
-        var d = document.getElementById('date').value;
-        var t = document.getElementById('time').value;
-        var p = document.getElementById('phone').value;
+function goStep(step) {
 
-        if (!d) {
-            document.getElementById('err2').innerText =
-                '⚠️ تاریخ را انتخاب کنید';
+  /* -----------------------------------------------------
+     STEP 2 — SERVICE VALIDATION
+  ----------------------------------------------------- */
 
-            return;
-        }
+  if (step === 2 && !booking.serviceType) {
+      document.getElementById("err1").innerText =
+          "⚠️ لطفا یک خدمت را انتخاب کنید";
 
-        if (!p || p.length < 10) {
-            document.getElementById('err2').innerText =
-                '⚠️ شماره موبایل معتبر وارد کنید (09-...)';
+      return;
+  }
 
-            return;
-        }
 
-        booking.preferredDate = d;
-        booking.preferredTime = t;
-        booking.clientContact = p;
+  /* -----------------------------------------------------
+     STEP 3 — FORM VALIDATION
+  ----------------------------------------------------- */
 
-        submitBooking();
-    }
+  if (step === 3) {
+      const date =
+          document.getElementById("date").value;
 
-    document
-        .querySelectorAll('.wstep')
-        .forEach(function (step) {
-            step.classList.remove('active');
-        });
+      const time =
+          document.getElementById("time").value;
 
-    document
-        .getElementById('step' + n)
-        .classList.add('active');
+      const phone =
+          document.getElementById("phone").value;
 
-    document
-        .querySelectorAll('.dot')
-        .forEach(function (dot, i) {
-            dot.classList.toggle('active', i < n);
-        });
+      if (!date) {
+          document.getElementById("err2").innerText =
+              "⚠️ تاریخ را انتخاب کنید";
 
-    document.getElementById('progressBar').style.width =
-        (n * 33.3) + '%';
+          return;
+      }
+
+      if (!phone || phone.length < 10) {
+          document.getElementById("err2").innerText =
+              "⚠️ شماره موبایل معتبر وارد کنید (09-...)";
+
+          return;
+      }
+
+      booking.preferredDate = date;
+      booking.preferredTime = time;
+      booking.clientContact = phone;
+
+      submitBooking();
+  }
+
+
+  /* -----------------------------------------------------
+     UPDATE STEP UI
+  ----------------------------------------------------- */
+
+  document
+      .querySelectorAll(".wstep")
+      .forEach(stepElement => {
+          stepElement.classList.remove("active");
+      });
+
+  document
+      .getElementById(`step${step}`)
+      .classList.add("active");
+
+
+  /* -----------------------------------------------------
+     UPDATE PROGRESS DOTS
+  ----------------------------------------------------- */
+
+  document
+      .querySelectorAll(".dot")
+      .forEach((dot, index) => {
+          dot.classList.toggle(
+              "active",
+              index < step
+          );
+      });
+
+
+  /* -----------------------------------------------------
+     UPDATE PROGRESS BAR
+  ----------------------------------------------------- */
+
+  document.getElementById("progressBar").style.width =
+      `${step * 33.3}%`;
 }
+
+
+/* =========================================================
+ SUBMIT BOOKING
+========================================================= */
 
 async function submitBooking() {
-    document.getElementById('processing').style.display = 'block';
-    document.getElementById('success').style.display = 'none';
 
-    var payload = {
-        serviceType: booking.serviceType,
-        preferredDate: booking.preferredDate,
-        preferredTime: booking.preferredTime,
-        clientContact: booking.clientContact
-    };
+  document.getElementById("processing").style.display =
+      "block";
 
-    console.log('POST /api/services/book', payload);
+  document.getElementById("success").style.display =
+      "none";
 
-    await new Promise(function (resolve) {
-        setTimeout(resolve, 1800);
-    });
 
-    document.getElementById('processing').style.display = 'none';
-    document.getElementById('success').style.display = 'block';
+  const payload = {
+      serviceType: booking.serviceType,
+      preferredDate: booking.preferredDate,
+      preferredTime: booking.preferredTime,
+      clientContact: booking.clientContact
+  };
 
-    document.getElementById('summary').innerText =
-        booking.serviceType +
-        ' | ' +
-        booking.preferredDate +
-        ' ساعت ' +
-        booking.preferredTime;
+
+  console.log(
+      "POST /api/services/book",
+      payload
+  );
+
+
+  await new Promise(resolve => {
+      setTimeout(resolve, 1800);
+  });
+
+
+  document.getElementById("processing").style.display =
+      "none";
+
+  document.getElementById("success").style.display =
+      "block";
+
+  document.getElementById("summary").innerText =
+      `${booking.serviceType} | ${booking.preferredDate} ساعت ${booking.preferredTime}`;
 }
 
 
-// ========================================
-// THREE.JS Hero - Metallic Shaft
-// ========================================
+/* =========================================================
+ THREE.JS HERO — METALLIC SHAFT
+ Runs only on pages that contain the canvas.
+========================================================= */
 
-let scene = new THREE.Scene();
+(function () {
 
-let cam = new THREE.PerspectiveCamera(
-    75,
-    innerWidth / innerHeight,
-    0.1,
-    1000
-);
+  const canvas =
+      document.getElementById("elevator3D");
 
-let ren = new THREE.WebGLRenderer({
-    canvas: document.getElementById('elevator3D'),
-    alpha: true
-});
-
-ren.setSize(innerWidth, innerHeight);
+  if (!canvas || typeof THREE === "undefined") {
+      return;
+  }
 
 
-// Elevator Shaft
+  /* -----------------------------------------------------
+     SCENE
+  ----------------------------------------------------- */
 
-let shaft = new THREE.Mesh(
-    new THREE.BoxGeometry(4, 12, 4),
-    new THREE.MeshStandardMaterial({
-        color: 0x222a3a,
-        metalness: 0.9,
-        roughness: 0.2,
-        transparent: true,
-        opacity: 0.25
-    })
-);
-
-scene.add(shaft);
+  const scene = new THREE.Scene();
 
 
-// Elevator Cabin
+  /* -----------------------------------------------------
+     CAMERA
+  ----------------------------------------------------- */
 
-let cabin = new THREE.Mesh(
-    new THREE.BoxGeometry(2.5, 2.5, 2.5),
-    new THREE.MeshStandardMaterial({
-        color: 0xD4AF37,
-        metalness: 1,
-        roughness: 0.15
-    })
-);
+  const camera =
+      new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+      );
 
-scene.add(cabin);
-
-
-// Lights
-
-let light1 = new THREE.PointLight(
-    0x1E90FF,
-    2,
-    30
-);
-
-light1.position.set(5, 5, 5);
-
-scene.add(light1);
+  camera.position.z = 14;
 
 
-let light2 = new THREE.PointLight(
-    0xD4AF37,
-    2,
-    30
-);
+  /* -----------------------------------------------------
+     RENDERER
+  ----------------------------------------------------- */
 
-light2.position.set(-5, -5, 5);
+  const renderer =
+      new THREE.WebGLRenderer({
+          canvas: canvas,
+          alpha: true
+      });
 
-scene.add(light2);
+  renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+  );
 
 
-// Camera
+  /* -----------------------------------------------------
+     ELEVATOR SHAFT
+  ----------------------------------------------------- */
 
-cam.position.z = 14;
+  const shaft =
+      new THREE.Mesh(
+          new THREE.BoxGeometry(
+              4,
+              12,
+              4
+          ),
+
+          new THREE.MeshStandardMaterial({
+              color: 0x222a3a,
+              metalness: 0.9,
+              roughness: 0.2,
+              transparent: true,
+              opacity: 0.25
+          })
+      );
+
+  scene.add(shaft);
 
 
-// Animation
+  /* -----------------------------------------------------
+     ELEVATOR CABIN
+  ----------------------------------------------------- */
 
-let t = 0;
+  const cabin =
+      new THREE.Mesh(
+          new THREE.BoxGeometry(
+              2.5,
+              2.5,
+              2.5
+          ),
 
-function anim() {
-    requestAnimationFrame(anim);
+          new THREE.MeshStandardMaterial({
+              color: 0xD4AF37,
+              metalness: 1,
+              roughness: 0.15
+          })
+      );
 
-    t += 0.015;
+  scene.add(cabin);
 
-    cabin.position.y = Math.sin(t) * 4;
-    shaft.rotation.y += 0.002;
-    cabin.rotation.y += 0.005;
 
-    ren.render(scene, cam);
-}
+  /* -----------------------------------------------------
+     LIGHTS
+  ----------------------------------------------------- */
 
-anim();
+  const blueLight =
+      new THREE.PointLight(
+          0x1E90FF,
+          2,
+          30
+      );
+
+  blueLight.position.set(
+      5,
+      5,
+      5
+  );
+
+  scene.add(blueLight);
+
+
+  const goldLight =
+      new THREE.PointLight(
+          0xD4AF37,
+          2,
+          30
+      );
+
+  goldLight.position.set(
+      -5,
+      -5,
+      5
+  );
+
+  scene.add(goldLight);
+
+
+  /* -----------------------------------------------------
+     ANIMATION
+  ----------------------------------------------------- */
+
+  let time = 0;
+
+  function animate() {
+
+      requestAnimationFrame(animate);
+
+      time += 0.015;
+
+      cabin.position.y =
+          Math.sin(time) * 4;
+
+      shaft.rotation.y += 0.002;
+
+      cabin.rotation.y += 0.005;
+
+      renderer.render(
+          scene,
+          camera
+      );
+  }
+
+  animate();
+
+})();
+
+
+/* =========================================================
+ REVEAL ON SCROLL + ANIMATED COUNTERS
+========================================================= */
+
+(function () {
+
+  if (!("IntersectionObserver" in window)) {
+      return;
+  }
+
+
+  /* =====================================================
+     SCROLL REVEAL
+  ===================================================== */
+
+  const revealTargets =
+      document.querySelectorAll(
+          "h2, .card, .glass, .t-step, .proj-card, .info-card, .page-hero"
+      );
+
+
+  const revealObserver =
+      new IntersectionObserver(
+          function (entries) {
+
+              entries.forEach(entry => {
+
+                  if (!entry.isIntersecting) {
+                      return;
+                  }
+
+
+                  const element =
+                      entry.target;
+
+
+                  revealObserver.unobserve(
+                      element
+                  );
+
+
+                  element.classList.add(
+                      "in"
+                  );
+
+
+                  /*
+                   * After the animation finishes,
+                   * restore the original hover/transition state.
+                   */
+
+                  setTimeout(() => {
+
+                      element.classList.remove(
+                          "reveal",
+                          "in"
+                      );
+
+                      element.style.transitionDelay =
+                          "";
+
+                  }, 900);
+
+              });
+
+          },
+          {
+              threshold: 0.15
+          }
+      );
+
+
+  /* -----------------------------------------------------
+     OBSERVE REVEAL ELEMENTS
+  ----------------------------------------------------- */
+
+  revealTargets.forEach(
+      (element, index) => {
+
+          element.classList.add(
+              "reveal"
+          );
+
+          element.style.transitionDelay =
+              `${(index % 4) * 80}ms`;
+
+          revealObserver.observe(
+              element
+          );
+
+      }
+  );
+
+
+  /* =====================================================
+     ANIMATED COUNTERS
+  ===================================================== */
+
+  const counterObserver =
+      new IntersectionObserver(
+          function (entries) {
+
+              entries.forEach(entry => {
+
+                  if (!entry.isIntersecting) {
+                      return;
+                  }
+
+
+                  const element =
+                      entry.target;
+
+
+                  counterObserver.unobserve(
+                      element
+                  );
+
+
+                  const end =
+                      Number(element.dataset.count);
+
+                  const suffix =
+                      element.dataset.suffix || "";
+
+                  const startTime =
+                      performance.now();
+
+
+                  function animateCounter(now) {
+
+                      const progress =
+                          Math.min(
+                              (now - startTime) / 1500,
+                              1
+                          );
+
+
+                      const easedProgress =
+                          1 -
+                          Math.pow(
+                              1 - progress,
+                              3
+                          );
+
+
+                      element.textContent =
+                          Math.round(
+                              end * easedProgress
+                          ) + suffix;
+
+
+                      if (progress < 1) {
+                          requestAnimationFrame(
+                              animateCounter
+                          );
+                      }
+                  }
+
+
+                  requestAnimationFrame(
+                      animateCounter
+                  );
+
+              });
+
+          },
+          {
+              threshold: 0.6
+          }
+      );
+
+
+  /* -----------------------------------------------------
+     OBSERVE COUNTERS
+  ----------------------------------------------------- */
+
+  document
+      .querySelectorAll("[data-count]")
+      .forEach(element => {
+          counterObserver.observe(element);
+      });
+
+})();
