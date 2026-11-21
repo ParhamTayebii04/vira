@@ -45,7 +45,7 @@ function scrollToId(id) {
 const booking = {
   serviceType: null,
   preferredDate: null,
-  preferredTime: "10:00",
+  preferredTime: null,
   clientContact: ""
 };
 
@@ -96,32 +96,19 @@ function goStep(step) {
   ----------------------------------------------------- */
 
   if (step === 3) {
-      const date =
-          document.getElementById("date").value;
+      const name = document.getElementById("bname").value.trim();
+      const phone = toEn(document.getElementById("phone").value.trim());
+      const fail = msg => { document.getElementById("err2").innerText = "⚠️ " + msg; };
 
-      const time =
-          document.getElementById("time").value;
+      if (name.length < 3) return fail("نام و نام‌خانوادگی را وارد کنید");
+      if (!booking.preferredDate) return fail("تاریخ را انتخاب کنید");
+      if (!booking.preferredTime) return fail("ساعت را انتخاب کنید");
+      if (!/^09\d{9}$/.test(phone)) return fail("شماره موبایل معتبر وارد کنید (09xxxxxxxxx)");
 
-      const phone =
-          document.getElementById("phone").value;
-
-      if (!date) {
-          document.getElementById("err2").innerText =
-              "⚠️ تاریخ را انتخاب کنید";
-
-          return;
-      }
-
-      if (!phone || phone.length < 10) {
-          document.getElementById("err2").innerText =
-              "⚠️ شماره موبایل معتبر وارد کنید (09-...)";
-
-          return;
-      }
-
-      booking.preferredDate = date;
-      booking.preferredTime = time;
+      document.getElementById("err2").innerText = "";
+      booking.clientName = name;
       booking.clientContact = phone;
+      booking.notes = document.getElementById("bnote").value.trim();
 
       submitBooking();
   }
@@ -169,43 +156,99 @@ function goStep(step) {
  SUBMIT BOOKING
 ========================================================= */
 
+/* Persian/Arabic digits -> Latin, and back */
+function toEn(s) {
+  return s.replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+}
+
+function faDigits(s) {
+  return String(s).replace(/\d/g, c => "۰۱۲۳۴۵۶۷۸۹"[c]);
+}
+
+/* Sends the booking to the owner's inbox (mailer.js); on failure returns to step 2 with the error */
 async function submitBooking() {
 
-  document.getElementById("processing").style.display =
-      "block";
+  document.getElementById("processing").style.display = "block";
+  document.getElementById("success").style.display = "none";
 
-  document.getElementById("success").style.display =
-      "none";
+  try {
+      await sendMail("درخواست جدید سرویس آسانسور | ویرا", {
+          "نام و نام‌خانوادگی": booking.clientName,
+          "موبایل": booking.clientContact,
+          "نوع خدمت": booking.serviceType,
+          "تاریخ": booking.dateLabel,
+          "ساعت": faDigits(booking.preferredTime),
+          "توضیحات": booking.notes || "—"
+      });
+  } catch (error) {
+      goStep(2);
+      document.getElementById("err2").innerText = "⚠️ " + error.message;
+      return;
+  }
 
-
-  const payload = {
-      serviceType: booking.serviceType,
-      preferredDate: booking.preferredDate,
-      preferredTime: booking.preferredTime,
-      clientContact: booking.clientContact
-  };
-
-
-  console.log(
-      "POST /api/services/book",
-      payload
-  );
-
-
-  await new Promise(resolve => {
-      setTimeout(resolve, 1800);
-  });
-
-
-  document.getElementById("processing").style.display =
-      "none";
-
-  document.getElementById("success").style.display =
-      "block";
-
+  document.getElementById("processing").style.display = "none";
+  document.getElementById("success").style.display = "block";
   document.getElementById("summary").innerText =
-      `${booking.serviceType} | ${booking.preferredDate} ساعت ${booking.preferredTime}`;
+      `${booking.serviceType} | ${booking.dateLabel} ساعت ${faDigits(booking.preferredTime)}`;
 }
+
+
+/* =========================================================
+ CUSTOM DATE / TIME PICKERS (replace the native inputs)
+========================================================= */
+
+(function () {
+
+  function select(box, button) {
+      [].forEach.call(box.children, item => {
+          item.classList.toggle("selected", item === button);
+          item.setAttribute("aria-checked", item === button);
+      });
+      document.getElementById("err2").innerText = "";
+  }
+
+  function init() {
+      const days = document.getElementById("dayPicker");
+      const times = document.getElementById("timePicker");
+      if (!days || !times) return;
+
+      const full = new Intl.DateTimeFormat("fa-IR", { weekday: "long", day: "numeric", month: "long" });
+      const part = (date, options) => new Intl.DateTimeFormat("fa-IR", options).format(date);
+
+      for (let i = 1; i <= 14; i++) {
+          const date = new Date();
+          date.setDate(date.getDate() + i);
+          const iso = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "v-day";
+          button.setAttribute("role", "radio");
+          button.setAttribute("aria-checked", "false");
+          button.innerHTML = "<small></small><b></b><small></small>";
+          button.children[0].textContent = part(date, { weekday: "short" });
+          button.children[1].textContent = part(date, { day: "numeric" });
+          button.children[2].textContent = part(date, { month: "short" });
+          button.onclick = () => { select(days, button); booking.preferredDate = iso; booking.dateLabel = full.format(date); };
+          days.appendChild(button);
+      }
+
+      for (let hour = 8; hour <= 20; hour++) {
+          const value = ("0" + hour).slice(-2) + ":00";
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "v-time";
+          button.setAttribute("role", "radio");
+          button.setAttribute("aria-checked", "false");
+          button.textContent = faDigits(value);
+          button.onclick = () => { select(times, button); booking.preferredTime = value; };
+          times.appendChild(button);
+      }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+
+})();
 
 
 /* =========================================================

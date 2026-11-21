@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروفایل | ویرا آسانسور مازندران</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ==================== Navigation ==================== -->
+    <nav class="glass-nav" aria-label="ناوبری اصلی">
+        <a href="index.html" class="logo">VIRA <span>ویرا</span></a>
+
+        <div class="links">
+            <a href="index.html">خانه</a>
+            <a href="catalog.html">محصولات</a>
+            <a href="services.html">خدمات</a>
+            <a href="projects.html">پروژه‌ها</a>
+            <a href="contact.html">تماس</a>
+            <span id="authSlot"></span>
+        </div>
+    </nav>
+
+    <!-- ==================== Content ==================== -->
+    <main class="page">
+<header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>پروفایل من</h1><p>اطلاعات حساب کاربری شما</p></header>
+<section class="au-wrap">
+  <div class="cf-form au-card" id="profCard" hidden>
+    <div class="pf-avatar" id="pfAvatar"></div>
+    <h3 id="pfName" dir="ltr"></h3>
+    <dl class="pf-list">
+      <div><dt>ایمیل</dt><dd id="pfEmail" dir="ltr"></dd></div>
+      <div><dt>موبایل</dt><dd id="pfPhone" dir="ltr"></dd></div>
+      <div><dt>عضویت از</dt><dd id="pfDate"></dd></div>
+    </dl>
+    <a class="btn-gold cf-submit pf-btn" href="services.html#booking">رزرو سرویس</a>
+    <button type="button" class="btn-ghost2 pf-btn" id="pfOut">خروج از حساب</button>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    Auth.ready.then(function () {
+      if (!Auth.user) { location.replace('auth.html?next=profile.html'); return; }
+      var u = Auth.user, $ = function (i) { return document.getElementById(i); };
+      $('pfAvatar').textContent = u.username.charAt(0).toUpperCase(); $('pfName').textContent = u.username;
+      $('pfEmail').textContent = u.email; $('pfPhone').textContent = u.phone;
+      $('pfDate').textContent = new Date(u.created).toLocaleDateString('fa-IR', { dateStyle: 'long' });
+      $('pfOut').onclick = Auth.logout; $('profCard').hidden = false;
+    });
+  });
+</script>
+    </main>
+
+    <!-- ==================== Footer ==================== -->
+    <footer>
+        © 2026 Vira Elevator Mazandaran
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    
+</body>
+</html>

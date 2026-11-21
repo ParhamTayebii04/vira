@@ -25,15 +25,50 @@
             <a href="services.html" class="active" aria-current="page">خدمات</a>
             <a href="projects.html">پروژه‌ها</a>
             <a href="contact.html">تماس</a>
+            <span id="authSlot"></span>
         </div>
     </nav>
 
     <!-- ==================== Content ==================== -->
     <main class="page">
 <header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>رزرو خدمات</h1><p>نصب، سرویس، تعمیر اضطراری یا مدرنیزاسیون؛ در سه قدم ساده</p></header>
-<section id="services">
+<section id="svc-intro">
+        <h2>خدماتی که ارائه می‌کنیم</h2>
+        <div class="svc-grid">
+            <article class="svc-card"><div class="svc-in"><span class="svc-ico">🏗️</span><h3>نصب آسانسور</h3><p>از بررسی چاه تا تحویل نهایی با تست ایمنی.</p><ul><li>بازدید و محاسبه ظرفیت</li><li>نصب و تنظیم دقیق</li><li>تست ایمنی و تحویل</li></ul><button type="button" class="svc-btn" data-svc="0">رزرو این خدمت</button></div></article>
+            <article class="svc-card"><div class="svc-in"><span class="svc-ico">⚙️</span><h3>سرویس ماهانه</h3><p>نگهداری منظم برای جلوگیری از خرابی‌های ناگهانی.</p><ul><li>بازدید دوره‌ای قطعات</li><li>روغن‌کاری و تنظیم</li><li>گزارش وضعیت آسانسور</li></ul><button type="button" class="svc-btn" data-svc="1">رزرو این خدمت</button></div></article>
+            <article class="svc-card"><div class="svc-in"><span class="svc-ico">🚨</span><h3>تعمیر اضطراری</h3><p>پاسخ‌گویی به توقف و خرابی‌های ناگهانی.</p><ul><li>امداد ۲۴ ساعته</li><li>عیب‌یابی در محل</li><li>تعویض قطعه معیوب</li></ul><button type="button" class="svc-btn" data-svc="2">رزرو این خدمت</button></div></article>
+            <article class="svc-card"><div class="svc-in"><span class="svc-ico">✨</span><h3>مدرنیزاسیون</h3><p>ارتقای آسانسورهای قدیمی از نظر ایمنی و راحتی.</p><ul><li>درایو و تابلو فرمان جدید</li><li>بهبود کابین و درب‌ها</li><li>کاهش مصرف برق</li></ul><button type="button" class="svc-btn" data-svc="3">رزرو این خدمت</button></div></article>
+        </div>
+    </section>
 
-        <h2>Service Precision Wizard</h2>
+    <section id="anatomy">
+        <h2>آناتومی آسانسور (سه‌بعدی)</h2>
+        <p class="svc-sub">مدل را بچرخانید و روی هر بخش بزنید تا توضیحش را ببینید.</p>
+        <div class="an-grid">
+            <div class="scene" id="scene" aria-hidden="true"><div class="stage" id="stage"></div></div>
+            <div class="an-info">
+                <div class="an-tabs" id="anTabs" role="tablist" aria-label="بخش‌های آسانسور"></div>
+                <div class="an-text glass" id="anText" aria-live="polite"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="checklist">
+        <h2>چک‌لیست سرویس دوره‌ای</h2>
+        <div class="chk-grid">
+            <div class="chk"><span>✓</span>بازدید ریل‌های راهنما و روغن‌کاری</div>
+            <div class="chk"><span>✓</span>بررسی ترمز و سیستم ایمنی</div>
+            <div class="chk"><span>✓</span>بازدید سیم‌بکسل‌ها و پولی</div>
+            <div class="chk"><span>✓</span>تنظیم درب‌های کابین و طبقات</div>
+            <div class="chk"><span>✓</span>بررسی تابلو فرمان و سنسورها</div>
+            <div class="chk"><span>✓</span>تست دکمه اضطراری و روشنایی کابین</div>
+        </div>
+    </section>
+
+    <section id="services">
+
+        <h2>رزرو سرویس</h2>
 
         <div id="booking" class="wizard-shell glass">
 
@@ -125,25 +160,26 @@
 
             <div id="step2" class="wstep">
 
-                <label>تاریخ ترجیحی</label>
-                <input type="date" id="date">
+                <label for="bname">نام و نام‌خانوادگی</label>
+                <input type="text" id="bname" autocomplete="name" placeholder="مثلاً علی حسینی">
+
+                <label id="dayLbl">تاریخ ترجیحی</label>
+                <div class="v-days" id="dayPicker" role="radiogroup" aria-labelledby="dayLbl"></div>
+
+                <label id="timeLbl">ساعت ترجیحی</label>
+                <div class="v-times" id="timePicker" role="radiogroup" aria-labelledby="timeLbl"></div>
 
 
-                <label>ساعت ترجیحی</label>
-                <input
-                    type="time"
-                    id="time"
-                    value="10:00"
-                >
-
-
-                <label>موبایل</label>
+                <label for="phone">موبایل</label>
                 <input
                     type="tel"
                     id="phone"
-                    placeholder="0911-xxx-xxxx"
+                    placeholder="09xxxxxxxxx" inputmode="numeric" autocomplete="tel"
                 >
 
+
+                <label for="bnote">آدرس یا توضیحات (اختیاری)</label>
+                <textarea id="bnote" rows="2" maxlength="400" placeholder="مثلاً آدرس ساختمان یا نوع مشکل"></textarea>
 
                 <div class="row">
 
@@ -224,5 +260,9 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="mailer.js"></script>
+    <script src="services-3d.js"></script>
 </body>
 </html>

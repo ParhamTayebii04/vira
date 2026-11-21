@@ -1177,3 +1177,140 @@ html.intro-active:not(.intro-open) .hero-content {
         animation: none;
     }
 }
+
+/* ==================== v3: header swap (logo left, portals right for Persian/RTL), contact, booking picker ==================== */
+.glass-nav{ flex-direction:row-reverse; }
+
+/* Booking: custom day / time pickers */
+.wstep textarea{ display:block; width:100%; margin:0 0 12px; padding:14px; border-radius:12px; border:1px solid #333; background:#111; color:#fff; color-scheme:dark; font-size:16px; font-family:inherit; }
+.wstep input{ font-size:16px; }
+.v-days{ display:flex; gap:10px; overflow-x:auto; padding:4px 2px 12px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
+.v-day{ flex:none; width:72px; padding:10px 4px; display:grid; text-align:center; scroll-snap-align:start; border-radius:16px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#eee; cursor:pointer; transition:.25s; }
+.v-day b{ font-size:24px; line-height:1.3; } .v-day small{ color:#999; font-size:12px; }
+.v-day:hover{ border-color:#D4AF37; transform:translateY(-3px); }
+.v-day.selected{ background:linear-gradient(160deg,rgba(212,175,55,.28),rgba(212,175,55,.08)); border-color:#D4AF37; box-shadow:0 0 22px rgba(212,175,55,.35); }
+.v-day.selected small{ color:#D4AF37; }
+.v-times{ display:grid; grid-template-columns:repeat(auto-fill,minmax(78px,1fr)); gap:10px; margin-bottom:14px; }
+.v-time{ padding:11px 6px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#eee; cursor:pointer; font-size:15px; transition:.25s; }
+.v-time:hover{ border-color:#1E90FF; }
+.v-time.selected{ background:#D4AF37; color:#000; border-color:#D4AF37; font-weight:800; box-shadow:0 0 18px rgba(212,175,55,.4); }
+
+/* Contact v2 */
+.cf-grid{ display:grid; grid-template-columns:1fr 1.1fr; gap:26px; align-items:start; max-width:1100px; margin:0 auto; }
+.cf-side{ display:grid; gap:16px; } .cf-side .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0; }
+.cf-lead{ color:#9aa3b2; margin-top:-8px; }
+.cf-side iframe{ width:100%; height:260px; border:0; border-radius:20px; filter:grayscale(.25) contrast(1.05); }
+.cf-form{ position:relative; margin:0; padding:34px; border-radius:26px; background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02)); border:1px solid rgba(212,175,55,.25); box-shadow:0 0 60px rgba(212,175,55,.08); backdrop-filter:blur(18px); }
+.cf-form h3{ font-size:22px; color:#D4AF37; margin-bottom:4px; } .cf-form .sub{ color:#9aa3b2; font-size:13px; margin-bottom:20px; }
+.field{ position:relative; margin:0 0 16px; }
+.field input,.field select,.field textarea{ width:100%; margin:0; padding:24px 14px 8px; border-radius:14px; background:#0d1219; border:1px solid #2a3140; color:#fff; font-size:16px; font-family:inherit; transition:.3s; color-scheme:dark; }
+.field textarea{ min-height:130px; resize:vertical; }
+.field label{ position:absolute; right:14px; top:17px; color:#8a93a3; font-size:14px; pointer-events:none; transition:.25s; }
+.field input:focus,.field select:focus,.field textarea:focus{ outline:none; border-color:#D4AF37; box-shadow:0 0 0 3px rgba(212,175,55,.15); }
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label,.field select+label{ top:7px; font-size:11px; color:#D4AF37; }
+.cf-count{ position:absolute; left:12px; bottom:8px; font-size:11px; color:#6b7383; }
+.cf-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.cf-hp{ position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; overflow:hidden; clip:rect(0 0 0 0); opacity:0; pointer-events:none; } /* hidden honeypot (no off-screen offset: that created horizontal scroll in RTL) */
+.cf-form .cf-submit{ position:relative; width:100%; padding:16px; margin:6px 0 0; border:0; border-radius:14px; font:800 16px 'Vazirmatn',sans-serif; color:#000; cursor:pointer; background:linear-gradient(135deg,#D4AF37,#b8860b); transition:.3s; }
+.cf-form .cf-submit:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(212,175,55,.45); }
+.cf-submit .spin{ display:none; position:absolute; inset:0; margin:auto; width:22px; height:22px; border:3px solid rgba(0,0,0,.25); border-top-color:#000; border-radius:50%; animation:spin .8s linear infinite; }
+.cf-submit.loading{ pointer-events:none; } .cf-submit.loading span{ opacity:0; } .cf-submit.loading .spin{ display:block; }
+.cf-msg{ min-height:22px; margin-top:12px; font-size:14px; } .cf-msg.ok{ color:#2ee59d; } .cf-msg.err{ color:#ff6b6b; }
+.cf-done{ text-align:center; padding:30px 10px; } .cf-done p{ color:#9aa3b2; margin:8px 0 18px; }
+@media (max-width:860px){ .cf-grid{ grid-template-columns:1fr; } .cf-row{ grid-template-columns:1fr; } .cf-form{ padding:22px; } }
+
+/* ==================== v4: accounts, services 3D, projects ==================== */
+/* Header: auth slot + mobile */
+#authSlot{ display:inline-flex; align-items:center; }
+.auth-link{ border:1px solid rgba(212,175,55,.5); border-radius:50px; padding:6px 16px !important; color:#D4AF37 !important; font-size:14px; }
+.auth-link:hover{ background:#D4AF37; color:#000 !important; }
+@media (max-width:760px){
+  .glass-nav{ flex-wrap:wrap; justify-content:center; gap:6px; padding:10px 4%; }
+  .links{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px; }
+  .links a{ margin:0 6px; font-size:13px; padding:4px 0; }
+  .page{ padding-top:130px; }
+}
+
+/* Auth */
+.au-wrap{ max-width:480px; margin:0 auto; padding:20px 5% 80px; }
+.au-card{ padding:30px; } .au-card .wstep{ animation:slideIn .45s cubic-bezier(.22,1,.36,1); }
+.au-links{ display:flex; flex-direction:column; gap:4px; margin-top:14px; align-items:center; }
+.au-link{ background:none; border:0; color:#9aa3b2; cursor:pointer; font:inherit; font-size:14px; padding:8px; } .au-link:hover{ color:#D4AF37; }
+.au-code{ letter-spacing:8px; text-align:center; font-size:22px !important; }
+.au-timer{ text-align:center; color:#9aa3b2; margin-top:14px; } .au-timer b{ color:#D4AF37; }
+.au-resend{ display:block; width:100%; margin-top:14px; }
+.au-meter{ height:6px; border-radius:99px; background:#1a2030; margin:-8px 0 16px; overflow:hidden; } .au-meter i{ display:block; height:100%; width:0; border-radius:99px; background:#ff6b6b; transition:.4s; }
+.au-meter i[data-s="2"]{ background:#ffb020; } .au-meter i[data-s="3"],.au-meter i[data-s="4"]{ background:#2ee59d; }
+.au-choice{ display:block; width:100%; text-align:right; padding:18px; margin-bottom:12px; border-radius:16px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); color:#eee; cursor:pointer; font:inherit; transition:.3s; }
+.au-choice:hover{ border-color:#D4AF37; transform:translateY(-3px); box-shadow:0 10px 30px rgba(212,175,55,.15); } .au-choice b{ display:block; font-size:16px; } .au-choice small{ color:#9aa3b2; }
+.au-yn{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:6px 0 16px; }
+.pf-avatar{ width:84px; height:84px; margin:0 auto 12px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:900; color:#000; background:linear-gradient(135deg,#D4AF37,#1E90FF); box-shadow:0 0 40px rgba(212,175,55,.35); }
+.au-card>h3#pfName{ text-align:center; margin-bottom:18px; }
+.pf-list{ display:grid; gap:10px; margin-bottom:22px; } .pf-list div{ display:flex; justify-content:space-between; gap:10px; padding:12px 14px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); }
+.pf-list dt{ color:#9aa3b2; } .pf-list dd{ margin:0; overflow-wrap:anywhere; }
+.pf-btn{ display:block; width:100%; text-align:center; margin-top:10px; text-decoration:none; }
+
+/* Services: 3D cards */
+.svc-sub{ color:#9aa3b2; margin:-10px 0 20px; }
+.svc-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:22px; }
+.svc-card{ transform-style:preserve-3d; transition:transform .25s ease-out; border-radius:22px; background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015)); border:1px solid rgba(212,175,55,.22); box-shadow:0 20px 40px rgba(0,0,0,.35); }
+.svc-in{ padding:26px; transform-style:preserve-3d; display:grid; gap:8px; height:100%; }
+.svc-ico{ font-size:46px; line-height:1; transform:translateZ(50px); display:block; filter:drop-shadow(0 12px 12px rgba(0,0,0,.5)); }
+.svc-card h3{ transform:translateZ(30px); color:#D4AF37; } .svc-card p{ color:#9aa3b2; font-size:14px; }
+.svc-card ul{ list-style:none; padding:0; display:grid; gap:4px; font-size:13.5px; color:#cfd6e4; } .svc-card li::before{ content:'◆'; color:#D4AF37; margin-left:8px; font-size:9px; }
+.svc-btn{ margin-top:8px; padding:11px; border-radius:12px; border:1px solid #D4AF37; background:transparent; color:#D4AF37; cursor:pointer; font-weight:700; font-size:14px; font-family:inherit; transform:translateZ(25px); transition:.3s; } .svc-btn:hover{ background:#D4AF37; color:#000; }
+
+/* Services: 3D elevator model */
+.an-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:24px; align-items:center; }
+.scene{ position:relative; height:430px; perspective:1100px; border-radius:24px; background:radial-gradient(circle at 50% 40%,rgba(30,144,255,.12),transparent 60%),rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.1); cursor:grab; touch-action:pan-y; overflow:hidden; user-select:none; } .scene.grab{ cursor:grabbing; }
+.stage{ position:absolute; left:50%; top:52%; width:0; height:0; transform-style:preserve-3d; }
+.pos{ position:absolute; left:0; top:0; transform-style:preserve-3d; }
+.box{ position:absolute; transform-style:preserve-3d; } .box .f{ position:absolute; display:block; border:1px solid; transition:.3s; }
+.shaft .f{ background:rgba(30,144,255,.05); border-color:rgba(30,144,255,.4); }
+.machine .f{ background:#1b2a4a; border-color:#1E90FF; } .cabin .f{ background:linear-gradient(135deg,#D4AF37,#8a6d1c); border-color:#f0d27a; }
+.cw .f{ background:#3a4660; border-color:#9fb0cc; } .rail .f{ background:#aab6cc; border-color:#dfe6f3; }
+.doorp{ position:absolute; width:70px; height:100px; background:linear-gradient(90deg,#27304a 48%,#D4AF37 48%,#D4AF37 52%,#27304a 52%); border:1px solid #D4AF37; border-radius:3px; transition:.3s; }
+.lift{ animation:liftY 7s ease-in-out infinite; } .lift.rev{ animation-direction:reverse; }
+@keyframes liftY{ 0%,100%{ translate:0 78px; } 50%{ translate:0 -78px; } }
+.hl .f,.hl.doorp,.doorp.hl{ border-color:#fff !important; filter:brightness(1.5); box-shadow:0 0 22px #1E90FF; }
+.an-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.an-tab{ padding:9px 16px; border-radius:50px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); color:#ccc; cursor:pointer; font:inherit; font-size:14px; transition:.25s; } .an-tab:hover{ border-color:#1E90FF; }
+.an-tab.active{ background:#D4AF37; color:#000; border-color:#D4AF37; font-weight:700; }
+.an-text{ min-height:130px; margin:0 !important; padding:22px !important; } .an-text h3{ color:#D4AF37; margin-bottom:6px; } .an-text p{ color:#cfd6e4; line-height:1.9; }
+.chk-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:14px; }
+.chk{ display:flex; align-items:center; gap:12px; padding:16px; border-radius:16px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); } .chk span{ flex:none; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(46,229,157,.15); color:#2ee59d; font-weight:900; }
+@media (max-width:860px){ .an-grid{ grid-template-columns:1fr; } .scene{ height:360px; } }
+
+/* Projects empty state */
+.empty-state{ text-align:center; margin:0 !important; padding:40px 24px !important; } .empty-state .es-ico{ font-size:46px; } .empty-state p{ color:#9aa3b2; max-width:520px; margin:8px auto 18px; line-height:1.9; }
+.empty-state[hidden]{ display:none; }
+
+[hidden]{ display:none !important; }
+
+/* keep the 3D model fully inside its frame */
+.stage{ scale:.88; top:54%; }
+
+/* ==================== v5: typography ==================== */
+/* Self-hosted Vazirmatn (downloaded automatically by server.js into fonts/); falls back to good system Persian fonts */
+@font-face{ font-family:'VazirLocal'; src:url('fonts/Vazirmatn-Variable.woff2') format('woff2'); font-weight:100 900; font-display:swap; }
+:root{ --font:'VazirLocal','Vazirmatn','Vazir','Segoe UI','Tahoma','Noto Sans Arabic','Arial',sans-serif; }
+*{ font-family:var(--font); }
+.logo,.eyebrow,.lift-floor{ font-family:'Montserrat','VazirLocal','Vazirmatn','Segoe UI',Tahoma,sans-serif; }
+/* letter-spacing breaks the joining of Persian letters: never apply it to Persian text */
+.logo span,a.ghost.btn-link,#catalog-btn,.catalog-button,.cf-submit,.btn-gold,.btn-ghost2{ letter-spacing:0 !important; }
+body{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+.field input,.field select,.field textarea{ font-weight:500; } .field label{ font-weight:500; } .cf-form h3{ font-weight:800; }
+.field input::placeholder,.field textarea::placeholder{ font-family:var(--font); }
+
+/* Mobile: one notch bolder and brighter greys, so text does not look thin on small dark screens */
+@media (max-width:760px){
+  body{ font-weight:500; }
+  p,li,small,label,dd,dt,input,select,textarea{ font-weight:500; }
+  h1,h2,h3,h4,b,strong,th{ font-weight:800; }
+  .links a,.btn-gold,.btn-ghost2,.cf-submit,.au-link,.an-tab,.v-time,.filters button{ font-weight:700; }
+  p,.sub,.cf-lead,.card p,.t-step p,.svc-card p,.catalog-card p,.proj-card p,.empty-state p,.au-timer,.svc-sub,.pf-list dt,.catalog-header p,.page-hero p,footer{ color:#d6dce8; }
+  .field label{ color:#b4bccb; } .au-card .sub{ color:#c9d0de; }
+}
+
+/* smaller 3D model on tablets/phones so it fits its frame */
+@media (max-width:860px){ .stage{ scale:.66; top:52%; } }

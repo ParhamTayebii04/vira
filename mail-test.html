@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تست ارسال ایمیل | ویرا</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="page">
+        <section class="glass" style="max-width:680px;margin:110px auto 40px">
+            <h2>تست ارسال ایمیل</h2>
+            <p style="color:#aaa;margin-bottom:16px">این دکمه یک ایمیل آزمایشی می‌فرستد و پاسخ خام FormSubmit را نشان می‌دهد.</p>
+            <button type="button" class="btn-gold" id="t">ارسال ایمیل آزمایشی</button>
+            <pre id="out" dir="ltr" style="margin-top:18px;white-space:pre-wrap;color:#9fe;font-size:13px"></pre>
+        </section>
+    </main>
+    <script>
+        var out = document.getElementById('out');
+        if (location.protocol === 'file:') out.textContent = 'این صفحه از روی فایل باز شده است. start.bat را اجرا کنید و از http://localhost:8080/mail-test.html باز کنید.';
+        document.getElementById('t').onclick = async function () {
+            out.textContent = 'در حال ارسال...';
+            try {
+                var r = await fetch('https://formsubmit.co/ajax/Parham.Tayebii1116@gmail.com', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ _subject: 'تست ارسال ایمیل | ویرا', _template: 'table', _captcha: 'false', 'پیام': 'این یک ایمیل آزمایشی از سایت ویرا است.' })
+                });
+                out.textContent = 'HTTP ' + r.status + '\n' + await r.text();
+            } catch (e) { out.textContent = 'ارتباط با FormSubmit برقرار نشد (اینترنت یا فیلترینگ): ' + e.message; }
+        };
+    </script>
+</body>
+</html>

@@ -25,25 +25,32 @@
             <a href="services.html">خدمات</a>
             <a href="projects.html" class="active" aria-current="page">پروژه‌ها</a>
             <a href="contact.html">تماس</a>
+            <span id="authSlot"></span>
         </div>
     </nav>
 
     <!-- ==================== Content ==================== -->
     <main class="page">
-<header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>پروژه‌های ما</h1><p>نگاهی به بخشی از آسانسورهای اجرا‌شده در سراسر مازندران</p></header>
+<header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>پروژه‌های ما</h1><p>انواع پروژه‌هایی که ویرا برایشان راهکار دارد</p></header>
 <section id="projects">
-
-        <h2>پروژه‌های مازندران</h2>
-
+        <h2>حوزه‌های فعالیت ویرا</h2>
         <div class="proj-grid">
-            <article class="proj-card"><span class="tag">تجاری</span><h3>هتل اسپیناس خزر</h3><div class="meta">📍 ساری</div><p>Group-Control · ۱۶۰۰ کیلوگرم</p></article>
-            <article class="proj-card"><span class="tag">مسکونی</span><h3>برج ساحلی بابلسر</h3><div class="meta">📍 بابلسر</div><p>۸ توقف · VVVF · کابین پانورامیک</p></article>
-            <article class="proj-card"><span class="tag">سرعت بالا</span><h3>برج‌های ساری - آسمان</h3><div class="meta">📍 ساری</div><p>۴.۰ m/s · کنترل مقصد هوشمند</p></article>
-            <article class="proj-card"><span class="tag">باربری</span><h3>سوله صنعتی نکا</h3><div class="meta">📍 نکا</div><p>۵۰۰۰ کیلوگرم · کابین استیل</p></article>
-            <article class="proj-card"><span class="tag">مسکونی</span><h3>پروژه چالوس مارینا</h3><div class="meta">📍 چالوس</div><p>اجرای مسکونی لوکس</p></article>
-            <article class="proj-card"><span class="tag">مسکونی</span><h3>ویلاهای نوشهر</h3><div class="meta">📍 نوشهر</div><p>آسانسور ویلایی</p></article>
+            <article class="proj-card"><span class="tag">مسکونی</span><h3>ساختمان‌های مسکونی</h3><div class="meta">ظرفیت ۴ تا ۸ نفر</div><p>کابین پانورامیک و درایو VVVF برای حرکت نرم و کم‌صدا.</p></article>
+            <article class="proj-card"><span class="tag">تجاری</span><h3>مجتمع‌های تجاری و اداری</h3><div class="meta">ظرفیت ۱۳ تا ۲۱ نفر</div><p>کنترل گروهی برای مدیریت ترافیک بالا.</p></article>
+            <article class="proj-card"><span class="tag">سرعت بالا</span><h3>برج‌ها</h3><div class="meta">سرعت ۴ تا ۶ متر بر ثانیه</div><p>کنترل مقصد برای کاهش زمان انتظار در ساختمان‌های بلند.</p></article>
+            <article class="proj-card"><span class="tag">باربری</span><h3>صنعتی و باربری</h3><div class="meta">تا ۵۰۰۰ کیلوگرم</div><p>کابین صنعتی مقاوم برای حمل بار سنگین.</p></article>
         </div>
+    </section>
 
+    <section id="gallery">
+        <h2>گالری پروژه‌های اجراشده</h2>
+        <div class="proj-grid" id="projGrid"></div>
+        <div class="empty-state glass" id="projEmpty">
+            <div class="es-ico">🏗️</div>
+            <h3>گالری در حال تکمیل است</h3>
+            <p>تصاویر و مشخصات پروژه‌های واقعی ویرا به‌زودی در این بخش قرار می‌گیرد. برای مشاهده سوابق کار یا درخواست بازدید از پروژه‌های اجراشده با ما در تماس باشید.</p>
+            <a href="contact.html" class="btn-gold btn-link">تماس با ما</a>
+        </div>
     </section>
     </main>
 
@@ -54,5 +61,9 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="projects-data.js"></script>
+    <script src="projects.js"></script>
 </body>
 </html>

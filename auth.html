@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود و ثبت‌نام | ویرا آسانسور مازندران</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ==================== Navigation ==================== -->
+    <nav class="glass-nav" aria-label="ناوبری اصلی">
+        <a href="index.html" class="logo">VIRA <span>ویرا</span></a>
+
+        <div class="links">
+            <a href="index.html">خانه</a>
+            <a href="catalog.html">محصولات</a>
+            <a href="services.html">خدمات</a>
+            <a href="projects.html">پروژه‌ها</a>
+            <a href="contact.html">تماس</a>
+            <span id="authSlot"></span>
+        </div>
+    </nav>
+
+    <!-- ==================== Content ==================== -->
+    <main class="page">
+<header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>ورود و ثبت‌نام</h1><p>برای رزرو سریع‌تر و داشتن پروفایل شخصی وارد شوید</p></header>
+<section class="au-wrap">
+  <div class="cf-form au-card">
+
+    <div class="wstep active" id="s-login">
+      <h3>ورود به حساب</h3><p class="sub">با نام کاربری و رمز عبور وارد شوید.</p>
+      <div class="field"><input id="lUser" placeholder=" " autocomplete="username" dir="ltr"><label for="lUser">نام کاربری</label></div>
+      <div class="field"><input id="lPass" type="password" placeholder=" " autocomplete="current-password" dir="ltr"><label for="lPass">رمز عبور</label></div>
+      <button type="button" class="btn-gold cf-submit" id="bLogin"><span>ورود</span><i class="spin"></i></button>
+      <div class="au-links"><button type="button" class="au-link" data-go="s-reg">حساب ندارم؛ ثبت‌نام</button><button type="button" class="au-link" data-go="s-forgot">فراموشی نام کاربری یا رمز عبور</button></div>
+    </div>
+
+    <div class="wstep" id="s-reg">
+      <h3>ثبت‌نام</h3><p class="sub">ایمیل، نام کاربری و شماره موبایل را وارد کنید؛ کد تأیید به ایمیل شما ارسال می‌شود.</p>
+      <div class="field"><input id="rEmail" type="email" placeholder=" " autocomplete="email" dir="ltr"><label for="rEmail">ایمیل</label></div>
+      <div class="field"><input id="rUser" placeholder=" " autocomplete="username" dir="ltr"><label for="rUser">نام کاربری (انگلیسی)</label></div>
+      <div class="field"><input id="rPhone" type="tel" inputmode="numeric" placeholder=" " autocomplete="tel"><label for="rPhone">شماره موبایل</label></div>
+      <button type="button" class="btn-gold cf-submit" id="bReg"><span>ارسال کد تأیید</span><i class="spin"></i></button>
+      <div class="au-links"><button type="button" class="au-link" data-go="s-login">قبلاً ثبت‌نام کرده‌ام؛ ورود</button></div>
+    </div>
+
+    <div class="wstep" id="s-code">
+      <h3>کد تأیید</h3><p class="sub">کد ۶ رقمی به <b id="cEmail" dir="ltr"></b> ارسال شد. آن را وارد کنید.</p>
+      <div class="field"><input id="cCode" class="au-code" inputmode="numeric" maxlength="6" placeholder=" " autocomplete="one-time-code" dir="ltr"><label for="cCode">کد ۶ رقمی</label></div>
+      <button type="button" class="btn-gold cf-submit" id="bVerify"><span>تأیید کد</span><i class="spin"></i></button>
+      <p class="au-timer" id="cdWrap">ارسال مجدد کد تا <b id="cdTimer">۰۲:۰۰</b> دیگر</p>
+      <button type="button" class="btn-ghost2 au-resend" id="bResend" hidden>ارسال مجدد کد</button>
+      <div class="au-links"><button type="button" class="au-link" id="bCodeBack">بازگشت</button></div>
+    </div>
+
+    <div class="wstep" id="s-pass">
+      <h3 id="pTitle">رمز عبور</h3><p class="sub">حداقل ۸ کاراکتر، شامل حرف و عدد.</p>
+      <div class="field"><input id="pNew" type="password" placeholder=" " autocomplete="new-password" dir="ltr"><label for="pNew">رمز عبور</label></div>
+      <div class="au-meter"><i id="pBar"></i></div>
+      <div class="field"><input id="pNew2" type="password" placeholder=" " autocomplete="new-password" dir="ltr"><label for="pNew2">تکرار رمز عبور</label></div>
+      <button type="button" class="btn-gold cf-submit" id="bPass"><span>تأیید و ادامه</span><i class="spin"></i></button>
+    </div>
+
+    <div class="wstep" id="s-forgot">
+      <h3>مشکل شما چیست؟</h3><p class="sub">یکی را انتخاب کنید.</p>
+      <button type="button" class="au-choice" id="bForgotUser"><b>🙈 نام کاربری‌ام را فراموش کرده‌ام</b><small>با ایمیل و رمز عبور</small></button>
+      <button type="button" class="au-choice" id="bForgotPass"><b>🔑 رمز عبورم را فراموش کرده‌ام</b><small>با ایمیل و نام کاربری</small></button>
+      <div class="au-links"><button type="button" class="au-link" data-go="s-login">بازگشت به ورود</button></div>
+    </div>
+
+    <div class="wstep" id="s-fpass">
+      <h3>فراموشی رمز عبور</h3><p class="sub">ایمیل و نام کاربری خود را وارد کنید.</p>
+      <div class="field"><input id="fpEmail" type="email" placeholder=" " dir="ltr"><label for="fpEmail">ایمیل</label></div>
+      <div class="field"><input id="fpUser" placeholder=" " dir="ltr"><label for="fpUser">نام کاربری</label></div>
+      <button type="button" class="btn-gold cf-submit" id="bFP"><span>ارسال کد</span><i class="spin"></i></button>
+      <div class="au-links"><button type="button" class="au-link" data-go="s-forgot">بازگشت</button></div>
+    </div>
+
+    <div class="wstep" id="s-fuser">
+      <h3>فراموشی نام کاربری</h3><p class="sub">ایمیل و رمز عبور خود را وارد کنید.</p>
+      <div class="field"><input id="fuEmail" type="email" placeholder=" " dir="ltr"><label for="fuEmail">ایمیل</label></div>
+      <div class="field"><input id="fuPass" type="password" placeholder=" " dir="ltr"><label for="fuPass">رمز عبور</label></div>
+      <button type="button" class="btn-gold cf-submit" id="bFU"><span>ارسال کد</span><i class="spin"></i></button>
+      <div class="au-links"><button type="button" class="au-link" data-go="s-forgot">بازگشت</button></div>
+    </div>
+
+    <div class="wstep" id="s-newuser">
+      <h3>نام کاربری جدید</h3><p class="sub">نام کاربری تازه را انتخاب کنید.</p>
+      <div class="field"><input id="uName" placeholder=" " dir="ltr" autocomplete="username"><label for="uName">نام کاربری جدید</label></div>
+      <p class="sub" style="margin-top:6px">آیا می‌خواهید رمز عبور هم عوض شود؟</p>
+      <div class="au-yn"><button type="button" class="v-time selected" data-chpw="0">خیر، همان رمز قبلی</button><button type="button" class="v-time" data-chpw="1">بله، رمز جدید</button></div>
+      <div id="uPw" hidden>
+        <div class="field"><input id="uNew" type="password" placeholder=" " autocomplete="new-password" dir="ltr"><label for="uNew">رمز عبور جدید</label></div>
+        <div class="au-meter"><i id="uBar"></i></div>
+        <div class="field"><input id="uNew2" type="password" placeholder=" " autocomplete="new-password" dir="ltr"><label for="uNew2">تکرار رمز عبور</label></div>
+      </div>
+      <button type="button" class="btn-gold cf-submit" id="bUser"><span>ثبت تغییرات</span><i class="spin"></i></button>
+    </div>
+
+    <p class="cf-msg" id="auMsg" role="status"></p>
+  </div>
+</section>
+    </main>
+
+    <!-- ==================== Footer ==================== -->
+    <footer>
+        © 2026 Vira Elevator Mazandaran
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="auth-page.js"></script>
+</body>
+</html>

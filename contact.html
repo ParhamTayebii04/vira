@@ -25,6 +25,7 @@
             <a href="services.html">خدمات</a>
             <a href="projects.html">پروژه‌ها</a>
             <a href="contact.html" class="active" aria-current="page">تماس</a>
+            <span id="authSlot"></span>
         </div>
     </nav>
 
@@ -32,52 +33,36 @@
     <main class="page">
 <header class="page-hero"><span class="eyebrow">VIRA ELEVATOR</span><h1>تماس با ما</h1><p>مهندسان ویرا آماده شنیدن نیاز پروژه شما هستند</p></header>
 <section id="contact">
+        <div class="cf-grid">
+            <div class="cf-side">
+                <div>
+                    <h2>دفتر مرکزی ساری</h2>
+                    <p class="cf-lead">ساری، بلوار پاسداران، مرکز مهندسی ویرا</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-card"><span>📞</span><b>تلفن</b><small>011-333xxxxx</small></div>
+                    <div class="info-card"><span>🚨</span><b>امداد</b><small>۲۴ ساعته، ۷ روز هفته</small></div>
+                    <div class="info-card"><span>⏰</span><b>ساعات کاری</b><small>شنبه تا پنجشنبه، ۸ تا ۱۷</small></div>
+                    <div class="info-card"><span>📍</span><b>آدرس</b><small>ساری، بلوار پاسداران</small></div>
+                </div>
+                <iframe title="نقشه دفتر ویرا" src="https://maps.google.com/maps?q=Sari,Iran&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+            </div>
 
-        <h2>دفتر مرکزی ساری</h2>
-
-        <div class="info-grid">
-            <div class="info-card"><span>📞</span><b>تلفن</b><small>011-333xxxxx</small></div>
-            <div class="info-card"><span>📍</span><b>آدرس</b><small>ساری، بلوار پاسداران</small></div>
-            <div class="info-card"><span>🚨</span><b>امداد</b><small>۲۴ ساعته، ۷ روز هفته</small></div>
+            <form class="cf-form" id="contactForm" novalidate>
+                <h3>برای ما پیام بگذارید</h3>
+                <p class="sub">درخواست مشاوره، قیمت یا هر نظر و پیشنهادی را بنویسید.</p>
+                <div class="field"><input id="cName" name="name" placeholder=" " autocomplete="name"><label for="cName">نام و نام‌خانوادگی</label></div>
+                <div class="cf-row">
+                    <div class="field"><input id="cPhone" name="phone" type="tel" inputmode="numeric" placeholder=" " autocomplete="tel"><label for="cPhone">موبایل</label></div>
+                    <div class="field"><input id="cEmail" name="email" type="email" placeholder=" " autocomplete="email" dir="ltr"><label for="cEmail">ایمیل (اختیاری)</label></div>
+                </div>
+                <div class="field"><select id="cTopic" name="topic"><option>درخواست مشاوره و قیمت</option><option>سرویس و نگهداری</option><option>نظر یا پیشنهاد</option><option>شکایت</option><option>سایر</option></select><label for="cTopic">موضوع پیام</label></div>
+                <div class="field"><textarea id="cMsg" name="message" placeholder=" " maxlength="1000"></textarea><label for="cMsg">متن پیام</label><span class="cf-count" id="cfCount">۰ / ۱۰۰۰</span></div>
+                <input class="cf-hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button type="submit" class="btn-gold cf-submit" id="cfSubmit"><span>ارسال پیام ✉️</span><i class="spin" aria-hidden="true"></i></button>
+                <p class="cf-msg" id="cfMsg" role="status"></p>
+            </form>
         </div>
-
-        <p>
-            ساری، بلوار پاسداران،
-            مرکز مهندسی ویرا |
-            011-333xxxxx
-        </p>
-
-
-        <!-- Google Map -->
-        <iframe
-            src="https://maps.google.com/maps?q=Sari,Iran&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="300"
-            style="border-radius: 20px; border: 0;"
-        ></iframe>
-
-
-        <!-- Contact Form -->
-        <form class="glass">
-
-            <input
-                placeholder="نام"
-            >
-
-            <input
-                placeholder="ایمیل"
-            >
-
-            <textarea
-                placeholder="توضیح پروژه..."
-            ></textarea>
-
-            <button>
-                ارسال Lead
-            </button>
-
-        </form>
-
     </section>
     </main>
 
@@ -88,5 +73,9 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="mailer.js"></script>
+    <script src="contact.js"></script>
 </body>
 </html>
